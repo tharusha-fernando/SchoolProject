@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lecture;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,7 @@ class LectureSeeder extends Seeder
      */
     public function run(): void
     {
+        Lecture::factory(10)->create(); 
         //
     }
 }

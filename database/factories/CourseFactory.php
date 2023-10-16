@@ -17,7 +17,12 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'course_code' => $this->faker->unique()->word,
+            'course_name' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
         ];
+        // return [
+        //     //
+        // ];
     }
 }

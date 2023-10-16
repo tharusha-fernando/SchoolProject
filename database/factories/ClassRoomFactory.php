@@ -17,7 +17,12 @@ class ClassRoomFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'number' => $this->faker->unique()->randomNumber(),
+            'name' => $this->faker->unique()->word,
         ];
+
+        // return [
+        //     //
+        // ];
     }
 }

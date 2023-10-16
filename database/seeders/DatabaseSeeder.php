@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Lecture;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -57,6 +58,11 @@ class DatabaseSeeder extends Seeder
 
         $user->Role()->attach($role);
         
+
+        $this->call(CourseSeeder::class);
+
+        $this->call(ClassRoomSeeder::class);
+        $this->call(LectureSeeder::class);
 
 
     }
