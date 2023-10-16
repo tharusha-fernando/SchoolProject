@@ -59,13 +59,14 @@ class DatabaseSeeder extends Seeder
         $user->Role()->attach($role);
         
 
+        $this->call(StudentSeeder::class);
+        $this->call(TutorSeeder::class);
+
         $this->call(CourseSeeder::class);
 
         $this->call(ClassRoomSeeder::class);
         $this->call(LectureSeeder::class);
 
-        $this->call(StudentSeeder::class);
-
-
+    
     }
 }

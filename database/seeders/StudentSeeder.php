@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Role;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,7 @@ class StudentSeeder extends Seeder
             if ($studentRole) {
                 $user->Role()->attach($studentRole);
             }
+            Student::factory()->create(['user_id'=>$user->id]);
         });
         //
     }

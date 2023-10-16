@@ -17,4 +17,17 @@ class Lecture extends Model
         'end_time',
     ];
 
+
+    public function Course(){
+        return $this->belongsTo(Course::class);
+    }
+
+    public function ClassRoom(){
+        return $this->belongsTo(ClassRoom::class);
+    }
+
+    public function Tutor(){
+        return $this->belongsTo(Tutors::class);
+    }
+
 }

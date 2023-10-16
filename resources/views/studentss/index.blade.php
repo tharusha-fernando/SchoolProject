@@ -561,10 +561,14 @@
                 columns: [{
                         data: 'name',
                         name: 'name',
+                        'className': 'text-center',
+
                     },
                     {
                         data: 'email',
                         name: 'email',
+                        'className': 'text-center',
+
                     },
 
 

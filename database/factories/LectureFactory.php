@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\ClassRoom;
 use App\Models\Course;
+use App\Models\Tutors;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,9 +20,7 @@ class LectureFactory extends Factory
      */
     public function definition(): array
     {
-        $user=User::whereHas('Role',function($query){
-            $query->where('name','tutor');
-        })->inRandomOrder()->first()->id;
+        $user=Tutors::inRandomOrder()->first()->id;
         return [
             'course_id' => Course::inRandomOrder()->first()->id, // Replace with logic to get valid course_id
             'classroom_id' => ClassRoom::inRandomOrder()->first()->id, // Replace with logic to get valid classroom_id
