@@ -14,6 +14,22 @@
                             </div>
                         </div>
                         assassas
+                        <div class="card-body px-0 pb-2 m-2 ">
+                            <table id="studentsDataTable" class="table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        {{-- <th>Appointment Reference</th> --}}
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>BirthDay</th>
+                                        {{-- <th></th>
+                                    <th>Appointment Date & Time</th>
+                                    <th>Receptionist</th>
+                                    <th>Appointment Fee</th> --}}
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                         {{-- <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
@@ -516,6 +532,48 @@
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
-    <x-plugins></x-plugins>
+    <x-plugins>
+    </x-plugins>
+    <script>
+            
+        $(document).ready(function() {
+
+
+            var table = $('#studentsDataTable').DataTable({
+                'lengthMenu': [15, 30, 50, 100],
+                'pageLength': 15,
+                'ajax': {
+                    'url': "{{ route('students.getData') }}",
+                    // 'data': function(d) {
+                    //     d.date_range = $("#date_range_value").val();
+                    //     d.receptionist = $("#receptionists").val();
+                    //     d.search_on = $('input[name="filter_on"]:checked').val();
+                    // }
+                },
+                'processing': true,
+                'serverSide': true,
+                dom: 'lBfrtip',
+
+                columns: [{
+                        data: 'name',
+                        name: 'name',
+                    },
+                    {
+                        data: 'email',
+                        name: 'email',
+                    },
+
+
+                ],
+                'order': [
+                    [0, 'desc']
+                ],
+                'columnDefs': [
+
+                ],
+            });
+
+        });
+    </script>
 
 </x-layout>
