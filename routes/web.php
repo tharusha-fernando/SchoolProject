@@ -72,6 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	//routes
+	
 	Route::resource('students',StudentController::class);
-	Route::get('students/get-data',[StudentController::class,'getData'])->name('students.getData');
+	Route::get('/students-get-data',[StudentController::class,'getData'])->name('students.getData');
 });

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Throwable;
+use Yajra\DataTables\Facades\DataTables;
 
 class StudentController extends Controller
 {
@@ -61,5 +64,33 @@ class StudentController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+
+
+
+
+
+    public function getData(Request $request)
+    {
+        try {
+            // dd("assasasasa");
+            $students = User::query()
+                ->whereHas('Role', function ($query) {
+                    $query->where('name', 'student');
+                });
+
+            return DataTables::of($students)
+                ->editColumn('name', function ($student) {
+                    return $student->name;
+                })->editColumn('email', function ($student) {
+                    return $student->email;
+                })
+                ->rawColumns(['name', 'email'])
+                ->make(true);
+        } catch (Throwable $th) {
+            dd($th->getMessage());
+        }
     }
 }

@@ -13,22 +13,26 @@
                                 <h6 class="text-white text-capitalize ps-3">Students table</h6>
                             </div>
                         </div>
-                        assassas
-                        <div class="card-body px-0 pb-2 m-2 ">
-                            <table id="studentsDataTable" class="table" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        {{-- <th>Appointment Reference</th> --}}
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>BirthDay</th>
-                                        {{-- <th></th>
-                                    <th>Appointment Date & Time</th>
-                                    <th>Receptionist</th>
-                                    <th>Appointment Fee</th> --}}
-                                    </tr>
-                                </thead>
-                            </table>
+                        {{-- assassas --}}
+                        <div class="card-body px-0 pb-2 m-2 border rounded">
+                            <div class="table-responsive  m-2 p-2">
+                                <table id="studentsDataTable" class="table align-items-center" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            {{-- <th>Appointment Reference</th> --}}
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>BirthDay</th>
+                                            <th>Actions</th>
+                                            {{-- <th></th>
+                                        <th>Appointment Date & Time</th>
+                                        <th>Receptionist</th>
+                                        <th>Appointment Fee</th> --}}
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            
                         </div>
                         {{-- <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">

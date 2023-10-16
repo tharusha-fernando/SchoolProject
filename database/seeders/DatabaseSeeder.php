@@ -64,6 +64,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ClassRoomSeeder::class);
         $this->call(LectureSeeder::class);
 
+        $this->call(StudentSeeder::class);
+
 
     }
 }
