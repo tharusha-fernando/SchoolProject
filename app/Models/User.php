@@ -52,4 +52,9 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+
+    public function Role(){
+        return $this->belongsToMany(Role::class,'users_roles','user_id','role_id');
+    }
+
 }
