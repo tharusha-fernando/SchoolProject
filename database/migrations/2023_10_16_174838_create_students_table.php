@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('dob');
             $table->string('pronounce');
             $table->string('address');
+            $table->string('tp');
             $table->timestamps();
         });
     }

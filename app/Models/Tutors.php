@@ -14,7 +14,8 @@ class Tutors extends Model
         'gender',
         'dob',
         'pronounce',
-        'address'
+        'address',
+        'tp'
 
     ];
     

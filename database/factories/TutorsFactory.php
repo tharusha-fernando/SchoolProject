@@ -24,7 +24,8 @@ class TutorsFactory extends Factory
             'gender'=> $this->faker->randomElement(['male', 'female','Non-Binary','Trans','Rather Not Say']),
             'dob'=>fake()->date(),
             'pronounce'=>$this->faker->randomElement(['he/him', 'she/her','they/them','Rather Not Say']),
-            'address'=>fake()->address()
+            'address'=>fake()->address(),
+            'tp'=>fake()->phoneNumber()
             //
         ];
         // return [

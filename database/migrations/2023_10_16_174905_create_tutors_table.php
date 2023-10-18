@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained(); // Assuming you have a users table
             $table->string('gender');
             $table->date('dob');
+            $table->string('tp');
             $table->string('pronounce');
             $table->string('address');
             $table->timestamps();

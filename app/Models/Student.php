@@ -13,7 +13,8 @@ class Student extends Model
         'gender',
         'dob',
         'pronounce',
-        'address'
+        'address',
+        'tp'
 
     ];
 
