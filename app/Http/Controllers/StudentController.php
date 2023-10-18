@@ -77,6 +77,7 @@ class StudentController extends Controller
         try {
             // dd("assasasasa");
             $students = User::query()
+                ->with('Student')
                 ->whereHas('role', function ($query) {
                     $query->where('name', 'student');
                 });
@@ -87,7 +88,31 @@ class StudentController extends Controller
                 })->editColumn('email', function ($student) {
                     return $student->email;
                 })
-                ->rawColumns(['name', 'email'])
+                ->addColumn('gender', function ($student) {
+                    return $student->Student->gender;
+                })
+                ->addColumn('address', function ($student) {
+                    return $student->Student->address;
+                })
+                ->addColumn('tp', function ($student) {
+                    return $student->Student->tp;
+                })
+                ->addColumn('actions', function ($student) {
+                    $route=route('students.edit')
+                    $htmlContent='<a rel="tooltip" class="btn btn-success btn-link"
+                    href="" data-original-title=""
+                    title="">
+                    <i class="material-icons">edit</i>
+                    <div class="ripple-container"></div>
+                </a>
+                
+                <button type="button" class="btn btn-danger btn-link"
+                data-original-title="" title="">
+                <i class="material-icons">close</i>
+                <div class="ripple-container"></div>';
+                    return $htmlContent;
+                })
+                ->rawColumns(['name', 'email','gender','address','tp','actions'])
                 ->make(true);
         } catch (Throwable $th) {
             dd($th->getMessage());

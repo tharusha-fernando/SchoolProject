@@ -22,7 +22,9 @@
                                             {{-- <th>Appointment Reference</th> --}}
                                             <th>Name</th>
                                             <th>Email</th>
-                                            <th>BirthDay</th>
+                                            <th>Gender</th>
+                                            <th>Address</th>
+                                            <th>Telephone</th>
                                             <th>Actions</th>
                                             {{-- <th></th>
                                         <th>Appointment Date & Time</th>
@@ -561,12 +563,36 @@
                 columns: [{
                         data: 'name',
                         name: 'name',
-                        'className': 'text-center',
+                        'className': 'text-start',
 
                     },
                     {
                         data: 'email',
                         name: 'email',
+                        'className': 'text-start',
+
+                    },
+                    {
+                        data: 'gender',
+                        name: 'gender',
+                        'className': 'text-start',
+
+                    },
+                    {
+                        data: 'address',
+                        name: 'address',
+                        'className': 'text-start',
+
+                    },
+                    {
+                        data: 'tp',
+                        name: 'tp',
+                        'className': 'text-start',
+
+                    },
+                    {
+                        data: 'actions',
+                        name: 'actions',
                         'className': 'text-center',
 
                     },
