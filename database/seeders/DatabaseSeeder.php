@@ -17,16 +17,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RoleSeeder::class);
+        // $this->call(RoleSeeder::class);
+
+        $this->call(LaratrustSeeder::class);
 
         $user= User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'superadmin@material.com',
             'password' => ('secret')
         ]);
-        $role = Role::where('name', 'admin')->first(); // Assuming 'admin' is the role name you want to attach
 
-        $user->Role()->attach($role);
+        $user->addRole('superadministrator'); // parameter can be a Role object, BackedEnum, array, id or the role string name
         
 
         $user= User::factory()->create([
@@ -34,9 +35,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'tutor@material.com',
             'password' => ('secret')
         ]);
-        $role = Role::where('name', 'tutor')->first(); // Assuming 'admin' is the role name you want to attach
-
-        $user->Role()->attach($role);
+        $user->addRole('tutor');
 
 
         $user= User::factory()->create([
@@ -44,9 +43,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@material.com',
             'password' => ('secret')
         ]);
-        $role = Role::where('name', 'admin')->first(); // Assuming 'admin' is the role name you want to attach
+        $user->addRole('administrator');
 
-        $user->Role()->attach($role);
         
 
         $user= User::factory()->create([
@@ -54,10 +52,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'student@material.com',
             'password' => ('secret')
         ]);
-        $role = Role::where('name', 'student')->first(); // Assuming 'admin' is the role name you want to attach
+        $user->addRole('student');
 
-        $user->Role()->attach($role);
-        
 
         $this->call(StudentSeeder::class);
         $this->call(TutorSeeder::class);

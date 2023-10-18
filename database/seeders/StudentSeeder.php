@@ -16,11 +16,8 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         User::factory(1000)->create()->each(function ($user) {
-            $studentRole = Role::where('name', 'student')->first();
+            $user->addRole('student');
 
-            if ($studentRole) {
-                $user->Role()->attach($studentRole);
-            }
             Student::factory()->create(['user_id'=>$user->id]);
         });
         //

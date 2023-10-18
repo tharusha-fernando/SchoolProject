@@ -16,11 +16,8 @@ class TutorSeeder extends Seeder
     public function run(): void
     {
         User::factory(20)->create()->each(function ($user) {
-            $tutorRole = Role::where('name', 'tutor')->first();
+            $user->addRole('tutor');
 
-            if ($tutorRole) {
-                $user->Role()->attach($tutorRole);
-            }
             Tutors::factory()->create(['user_id'=>$user->id]);
 
         });

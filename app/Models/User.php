@@ -8,10 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Laratrust\Contracts\LaratrustUser;
+use Laratrust\Traits\HasRolesAndPermissions;
 
-class User extends Authenticatable
+class User extends Authenticatable implements LaratrustUser
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable,HasRolesAndPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -52,9 +54,10 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-
     public function Role(){
-        return $this->belongsToMany(Role::class,'users_roles','user_id','role_id');
+        return $this->belongsToMany(Role::class,'role_user','user_id','role_id');
     }
 
+
+  
 }

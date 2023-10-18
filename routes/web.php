@@ -73,6 +73,19 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//routes
 	
-	Route::resource('students',StudentController::class);
-	Route::get('/students-get-data',[StudentController::class,'getData'])->name('students.getData');
+	
+
+	Route::group(['middleware' => ['role:administrator']], function() {
+		Route::resource('students',StudentController::class);
+		Route::get('/students-get-data',[StudentController::class,'getData'])->name('students.getData');
+	});
+	
+
+	Route::group(['prefix' => 'student', 'middleware' => ['role:student']], function() {
+	
+	});
+
+	Route::group(['prefix' => 'tutor', 'middleware' => ['role:tutor']], function() {
+	
+	});
 });

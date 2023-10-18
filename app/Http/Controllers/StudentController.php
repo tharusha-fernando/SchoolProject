@@ -77,7 +77,7 @@ class StudentController extends Controller
         try {
             // dd("assasasasa");
             $students = User::query()
-                ->whereHas('Role', function ($query) {
+                ->whereHas('role', function ($query) {
                     $query->where('name', 'student');
                 });
 
