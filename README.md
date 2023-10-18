@@ -1,6 +1,6 @@
-git pull
-composer install
-npm install
+git pull ,
+composer install,
+npm install,
 php artisan migrate --seed
 
 
