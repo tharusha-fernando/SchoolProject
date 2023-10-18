@@ -23,7 +23,7 @@ class CreateStudentRequest extends FormRequest
     {
         return [
             'name'=>'required',
-            'email'=>'required',
+            'email'=>['required','unique:users,email'],
             // 'password'=>bcrypt($validatedData['email']),
             'address'=>'required',
             'tp'=>'required',

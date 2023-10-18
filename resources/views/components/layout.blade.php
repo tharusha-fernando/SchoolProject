@@ -161,6 +161,19 @@
             $('#loading-spinner .backdrop-desc').html('');
             spinner.hide();
         }
+
+        function displayValidationErrors(errors) {
+        $.each(errors, function(key, value) {
+            var error = '';
+            $.each(value, function(index, errorMessage) {
+                error = error + errorMessage + ' '
+            });
+            $(".error_" + key).text(error);
+            $(".error_" + key).closest('.form-group').addClass(
+                'border--red');
+        });
+    }
+
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
