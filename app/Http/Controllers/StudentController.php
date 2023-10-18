@@ -23,6 +23,7 @@ class StudentController extends Controller
      */
     public function create()
     {
+        return view('students.create');
         //
     }
 
@@ -100,17 +101,16 @@ class StudentController extends Controller
                 ->addColumn('actions', function ($student) {
                     // $route=route('students.edit')
                     $route = route('students.edit', ['student' => $student]);
-                    $htmlContent='<a rel="tooltip" class="btn btn-success btn-link"
-                    href="" data-original-title=""
-                    title="">
-                    <i class="material-icons">edit</i>
-                    <div class="ripple-container"></div>
-                </a>
-                
-                <button type="button" class="btn btn-danger btn-link"
-                data-original-title="" title="">
-                <i class="material-icons">close</i>
-                <div class="ripple-container"></div>';
+                    $htmlContent = '
+                    <a rel="tooltip" class="btn btn-success btn-link" href="' . $route . '" data-original-title="" title="">
+                        <i class="material-icons">edit</i>
+                        <div class="ripple-container"></div>
+                    </a>
+                    
+                    <button type="button" class="btn btn-danger btn-link" data-original-title="" title="">
+                        <i class="material-icons">close</i>
+                        <div class="ripple-container"></div>
+                    ';
                     return $htmlContent;
                 })
                 ->rawColumns(['name', 'email','gender','address','tp','actions'])
