@@ -10,36 +10,71 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Students table</h6>
+                                <h6 class="text-white text-capitalize ps-3">Add Students</h6>
                             </div>
                         </div>
                         {{-- assassas --}}
-                        <div class="card-body px-0 pb-2 m-2 border rounded">
-                            <div class=" me-3 my-3 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="{{route('students.create')}}"><i
-                                        class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
-                                    User</a>
+                        <div class="card-body px-0 pb-2 m-2">
+                            <div class="px-0 pb-2 m-2">
+                                <form method='POST' action='{{ route('students.store') }}' id="studentCreateForm">
+                                    @csrf
+                                    <div class="row">
+
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Email address</label>
+                                            <input type="email" name="email"
+                                                class="form-control border border-2 p-2"
+                                                value='{{ old('email', auth()->user()->email) }}'>
+                                                <small class="text-danger error error_email">{{ $errors->first('email') }}</small>
+
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Name</label>
+                                            <input type="text" name="name"
+                                                class="form-control border border-2 p-2"
+                                                value='{{ old('name', auth()->user()->name) }}'>
+                                                <small class="text-danger error error_name">{{ $errors->first('name') }}</small>
+
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Phone</label>
+                                            <input type="number" name="tp"
+                                                class="form-control border border-2 p-2"
+                                                value=''>
+                                                <small class="text-danger error error_tp">{{ $errors->first('tp') }}</small>
+
+                                        </div>
+
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Gender</label>
+                                            <div class="form-group">
+                                                <select class="form-control  border border-2 p-2" id="exampleGender" name="gender">
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
+                                                    <option value="non-binary">Non-Binary</option>
+                                                    <!-- Add more options as needed -->
+                                                </select>
+                                            </div>
+                                            
+                                            <small class="text-danger error error_gender">{{ $errors->first('gender') }}</small>
+
+                                        </div>
+
+                                        <div class="mb-3 col-md-12">
+                                            <label for="floatingTextarea2">Address</label>
+                                            <textarea class="form-control border border-2 p-2" placeholder=" Say something about yourself" id="floatingTextarea2"
+                                                name="address" rows="4" cols="50">{{ old('about', auth()->user()->about) }}</textarea>
+                                                <small class="text-danger error error_address">{{ $errors->first('address') }}</small>
+
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn bg-gradient-dark">Submit</button>
+                                </form>
                             </div>
-                            <div class="table-responsive  m-2 p-2">
-                                <table id="studentsDataTable" class="table align-items-center" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            {{-- <th>Appointment Reference</th> --}}
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Gender</th>
-                                            <th>Address</th>
-                                            <th>Telephone</th>
-                                            <th>Actions</th>
-                                            {{-- <th></th>
-                                        <th>Appointment Date & Time</th>
-                                        <th>Receptionist</th>
-                                        <th>Appointment Fee</th> --}}
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            
+
+
                         </div>
                         {{-- <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
@@ -546,8 +581,19 @@
     <x-plugins>
     </x-plugins>
     <script>
-            
         $(document).ready(function() {
+
+            $("#studentCreateForm").on('submit', function(e) {
+                e.preventDefault();
+                $('.error').text('');
+                $('.form-group').removeClass('border--red');
+
+                var action = $(this).attr('action');
+                var formData = $(this).serialize();
+                var method = $(this).attr('method');
+
+                submitForm(action, method, formData);
+            });
 
 
             var table = $('#studentsDataTable').DataTable({

@@ -47,10 +47,43 @@
 
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 
+    <style>
+        #loading-spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            display: none;
+        }
+
+        #loading-spinner .spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
 </head>
 
 <body class="{{ $bodyClass }}">
-   
+    <div id="loading-spinner" class="text-center">
+        <div class="spinner"></div>
+    </div>
+
 
     {{ $slot }}
 
@@ -58,6 +91,8 @@
     <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
     <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="{{ asset('assets') }}/js/plugins/smooth-scrollbar.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script>
+
     @stack('js')
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
@@ -66,6 +101,65 @@
                 damping: '0.5'
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+
+        function submitForm(action, method, formData) {
+            $.ajax({
+                url: action,
+                type: method,
+                data: formData,
+                dataType: 'json',
+                beforeSend: function() {
+                    showLoading();
+                },
+                success: function(response, status, xhr) {
+                    if (xhr.status === 200) {
+                        flasher.success(response.message);
+                        // if (table) {
+                        //     table.ajax.reload();
+                        // }
+                        // if (modal) {
+                        //     $(modal).modal("hide");
+                        // }
+
+                    } else if (xhr.status === 204) {
+                        flasher.warning('Please make any changes.');
+
+                    } else if (xhr.status === 205) {
+                        flasher.error(response.message);
+
+                    } else {
+                        flasher.error("Internal server error.");
+                    }
+                },
+                error: function(xhr) {
+                    if (xhr.status === 422) {
+                        var errors = xhr.responseJSON.errors;
+                        displayValidationErrors(errors);
+                    } else {
+                        flasher.error("Internal Server Error.");
+                    }
+                },
+                complete: function() {
+                    hideLoading();
+                }
+            });
+
+
+
+        }
+
+
+        function showLoading(desc = '') {
+            var spinner = $('#loading-spinner');
+            $('#loading-spinner .backdrop-desc').html(desc);
+            spinner.show();
+        }
+
+        function hideLoading() {
+            var spinner = $('#loading-spinner');
+            $('#loading-spinner .backdrop-desc').html('');
+            spinner.hide();
         }
     </script>
     <!-- Github buttons -->

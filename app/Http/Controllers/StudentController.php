@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateStudentRequest;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Throwable;
@@ -30,8 +32,31 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateStudentRequest $request)
     {
+        $validatedData=$request->validated();
+        // dd($validatedData);
+
+        $user=User::create([
+            'name'=>$validatedData['name'],
+            'email'=>$validatedData['email'],
+            'password'=>bcrypt('12345678'),//$validatedData['email']
+        ]);
+        $user->addRole('student');
+
+        $student=Student::create([
+            'address'=>$validatedData['address'],
+            'tp'=>$validatedData['tp'],
+            'gender'=>$validatedData['gender'],
+            'address'=>$validatedData['address'],
+            'user_id'=>$user->id,
+            'dob'=>fake()->date(),
+            'pronounce'=>fake()->word()
+        ]);
+        
+
+        return response()->json(['message'=>"Student Created Successfully"],200);
+
         //
     }
 
@@ -81,7 +106,7 @@ class StudentController extends Controller
                 ->with('Student')
                 ->whereHas('role', function ($query) {
                     $query->where('name', 'student');
-                });
+                })->orderBy('created_at', 'desc');
 
             return DataTables::of($students)
                 ->editColumn('name', function ($student) {
@@ -90,13 +115,13 @@ class StudentController extends Controller
                     return $student->email;
                 })
                 ->addColumn('gender', function ($student) {
-                    return $student->Student->gender;
+                    return $student->Student ? $student->Student->gender :"";
                 })
                 ->addColumn('address', function ($student) {
-                    return $student->Student->address;
+                    return $student->Student ? $student->Student->address : "";
                 })
                 ->addColumn('tp', function ($student) {
-                    return $student->Student->tp;
+                    return $student->Student ? $student->Student->tp : "";
                 })
                 ->addColumn('actions', function ($student) {
                     // $route=route('students.edit')
