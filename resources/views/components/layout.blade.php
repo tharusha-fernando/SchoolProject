@@ -50,6 +50,7 @@
 </head>
 
 <body class="{{ $bodyClass }}">
+   
 
     {{ $slot }}
 
