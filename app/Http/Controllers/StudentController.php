@@ -154,6 +154,8 @@ class StudentController extends Controller
                 ->addColumn('actions', function ($student) {
                     // $route=route('students.edit')
                     $route = route('students.edit', ['student' => $student]);
+                    $deleteRoute = route('students.destroy', ['student' => $student]);
+
                     $htmlContent = '
                     <a rel="tooltip" class="btn btn-success btn-link" href="' . $route . '" data-original-title="" title="">
                         <i class="material-icons">edit</i>
