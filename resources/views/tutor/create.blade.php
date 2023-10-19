@@ -10,12 +10,12 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Add Students</h6>
+                                <h6 class="text-white text-capitalize ps-3">Add Tutor</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2 m-2">
                             <div class="px-0 pb-2 m-2">
-                                <form method='POST' action='{{ route('students.store') }}' id="studentCreateForm">
+                                <form method='POST' action='{{ route('tutors.store') }}' id="studentCreateForm">
                                     @csrf
                                     <div class="row">
 
@@ -71,6 +71,22 @@
                                                 class="text-danger error error_address">{{ $errors->first('address') }}</small>
 
                                         </div>
+
+                                        <div class="mb-3 col-md-12">
+                                            <label for="floatingTextarea2">Courses</label>
+                                            <select class="form-control border border-2 p-2" id="courses"
+                                                name="courses[]" multiple>
+                                                @foreach ($Courses as $course)
+                                                    <option value="{{ $course->id }}">
+                                                        {{ $course->course_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
+                                            <small
+                                                class="text-danger error error_address">{{ $errors->first('address') }}</small>
+
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn bg-gradient-dark">Submit</button>
                                 </form>
@@ -78,11 +94,11 @@
 
 
                         </div>
-                     
+
                     </div>
                 </div>
             </div>
-         
+
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
@@ -111,7 +127,7 @@
                 'pageLength': 15,
                 'ajax': {
                     'url': "{{ route('students.getData') }}",
-                    
+
                 },
                 'processing': true,
                 'serverSide': true,

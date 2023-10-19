@@ -44,7 +44,7 @@ class StudentController extends Controller
         ]);
         $user->addRole('student');
 
-        $tutor=Student::create([
+        $student=Student::create([
             'address'=>$validatedData['address'],
             'tp'=>$validatedData['tp'],
             'gender'=>$validatedData['gender'],
@@ -71,9 +71,9 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $tutor)
+    public function edit(User $student)
     {
-        $tutor->load('Student');
+        $student->load('Student');
 
         return view('students.edit',compact('student'));
 
@@ -83,16 +83,16 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateStudenRequest $request, User $tutor)
+    public function update(UpdateStudenRequest $request, User $student)
     {
         $validatedData=$request->validated();
 
-        $tutor->update([
+        $student->update([
             'name'=>$validatedData['name'],
             'email'=>$validatedData['email'],
         ]);
 
-        $tutor->Tutor->update([
+        $student->Student->update([
             'address'=>$validatedData['address'],
             'tp'=>$validatedData['tp'],
             'gender'=>$validatedData['gender'],
@@ -107,9 +107,9 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $tutor)
+    public function destroy(User $student)
     {
-        $tutor->delete();
+        $student->delete();
         return response()->json(['status' => 'success', 'message' => 'Student Deleted Successfully.'], 200);
         //
     }
@@ -123,29 +123,29 @@ class StudentController extends Controller
     public function getData(Request $request)
     {
         try {
-            $tutors = User::query()
-                ->with('Tutor')
+            $students = User::query()
+                ->with('Student')
                 ->whereHas('role', function ($query) {
-                    $query->where('name', 'tutor');
+                    $query->where('name', 'student');
                 })->orderBy('created_at', 'desc');
 
-            return DataTables::of($tutors)
-                ->editColumn('name', function ($tutor) {
-                    return $tutor->name;
-                })->editColumn('email', function ($tutor) {
-                    return $tutor->email;
+            return DataTables::of($students)
+                ->editColumn('name', function ($student) {
+                    return $student->name;
+                })->editColumn('email', function ($student) {
+                    return $student->email;
                 })
-                ->addColumn('gender', function ($tutor) {
-                    return $tutor->Tutor ? $tutor->Tutor->gender :"";
+                ->addColumn('gender', function ($student) {
+                    return $student->Student ? $student->Student->gender :"";
                 })
-                ->addColumn('address', function ($tutor) {
-                    return $tutor->Tutor ? $tutor->Tutor->address : "";
+                ->addColumn('address', function ($student) {
+                    return $student->Student ? $student->Student->address : "";
                 })
-                ->addColumn('tp', function ($tutor) {
-                    return $tutor->Tutor ? $tutor->Tutor->tp : "";
+                ->addColumn('tp', function ($student) {
+                    return $student->Student ? $student->Student->tp : "";
                 })
-                ->addColumn('actions', function ($tutor) {
-                    $route = route('students.edit', ['student' => $tutor]);
+                ->addColumn('actions', function ($student) {
+                    $route = route('students.edit', ['student' => $student]);
                 
                     $htmlContent = '
                         <a rel="tooltip" class="btn btn-success btn-link" href="' . $route . '" data-original-title="" title="">
@@ -153,7 +153,7 @@ class StudentController extends Controller
                             <div class="ripple-container"></div>
                         </a>
                         
-                        <button data-id="' . $tutor->id . '" class="btn btn-danger btn-link deleteBtn" data-original-title="" title="">
+                        <button data-id="' . $student->id . '" class="btn btn-danger btn-link deleteBtn" data-original-title="" title="">
                             <i class="material-icons">close</i>
                             <div class="ripple-container"></div>
                         </button>

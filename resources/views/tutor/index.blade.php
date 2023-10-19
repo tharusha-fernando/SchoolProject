@@ -10,17 +10,17 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Students table</h6>
+                                <h6 class="text-white text-capitalize ps-3">Tutors table</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2 m-2 border rounded">
                             <div class=" me-3 my-3 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="{{ route('students.create') }}"><i
+                                <a class="btn bg-gradient-dark mb-0" href="{{ route('tutors.create') }}"><i
                                         class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
-                                    User</a>
+                                    Tutor</a>
                             </div>
                             <div class="table-responsive  m-2 p-2">
-                                <table id="studentsDataTable" class="table align-items-center" cellspacing="0"
+                                <table id="tutorsDataTable" class="table align-items-center" cellspacing="0"
                                     width="100%">
                                     <thead>
                                         <tr>
@@ -29,6 +29,8 @@
                                             <th>Gender</th>
                                             <th>Address</th>
                                             <th>Telephone</th>
+                                            <th>Courses</th>
+
                                             <th>Actions</th>
                                             
                                         </tr>
@@ -71,11 +73,11 @@
              
             });
 
-            var table = $('#studentsDataTable').DataTable({
+            var table = $('#tutorsDataTable').DataTable({
                 'lengthMenu': [15, 30, 50, 100],
                 'pageLength': 15,
                 'ajax': {
-                    'url': "{{ route('students.getData') }}",
+                    'url': "{{ route('tutors.getData') }}",
                    
                 },
                 'processing': true,
@@ -113,6 +115,12 @@
 
                     },
                     {
+                        data: 'courses',
+                        name: 'courses',
+                        'className': 'text-start',
+
+                    },
+                    {
                         data: 'actions',
                         name: 'actions',
                         'className': 'text-center',
@@ -128,7 +136,7 @@
                     
                     {
                         "targets": 3,
-                        "width": "60px",
+                        "width": "100px",
                     },
                 ],
             });

@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Lecture;
 use App\Models\Role;
+use App\Models\Student;
+use App\Models\Tutors;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
@@ -36,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'password' => ('secret')
         ]);
         $user->addRole('tutor');
+        Tutors::factory()->create(['user_id'=>$user->id]);
 
 
         $user= User::factory()->create([
@@ -53,6 +56,8 @@ class DatabaseSeeder extends Seeder
             'password' => ('secret')
         ]);
         $user->addRole('student');
+        Student::factory()->create(['user_id'=>$user->id]);
+
 
 
         $this->call(StudentSeeder::class);
