@@ -37,6 +37,11 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
+        $validatedData=$request->validated();
+        Course::create($validatedData);
+
+        return response()->json(['message'=>"Course Created Successfully"],200);
+
         //
     }
 
@@ -53,6 +58,10 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
+        // $student->load('Student');
+
+        return view('courses.edit',compact('course'));
+
         //
     }
 
@@ -61,6 +70,11 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
+        $validatedData=$request->validated();
+        $course->update($validatedData);
+
+        return response()->json(['message'=>"Course Updated Successfully"],200);
+
         //
     }
 

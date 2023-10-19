@@ -1,5 +1,5 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-    <x-navbars.sidebar activePage="students"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="courses"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>
@@ -10,47 +10,48 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Add Students</h6>
+                                <h6 class="text-white text-capitalize ps-3">Edit Course</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2 m-2">
                             <div class="px-0 pb-2 m-2">
-                                <form method='PUT' action='{{ route('students.update', ['student' => $student]) }}' id="studentEditForm">
+                                <form method='PUT' action='{{ route('courses.update', ['course' => $course]) }}'' id="studentCreateForm">
+                                    {{-- action='{{ route('courses.update') }}  --}}
                                     @csrf
                                     <div class="row">
 
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Email address</label>
-                                            <input type="email" name="email"
+                                            <label class="form-label">Code</label>
+                                            <input type="text" name="course_code"
                                                 class="form-control border border-2 p-2"
-                                                value='{{ $student->email}}'>
+                                                value='{{$course->course_code}}'>
                                             <small
-                                                class="text-danger error error_email">{{ $errors->first('email') }}</small>
+                                                class="text-danger error error_course_code">{{ $errors->first('course_code') }}</small>
 
                                         </div>
 
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Name</label>
-                                            <input type="text" name="name"
+                                            <label class="form-label">Course Name</label>
+                                            <input type="text" name="course_name"
                                                 class="form-control border border-2 p-2"
-                                                value='{{ $student->name }}'>
+                                                value='{{$course->course_name}}'>
                                             <small
-                                                class="text-danger error error_name">{{ $errors->first('name') }}</small>
+                                                class="text-danger error error_course_name">{{ $errors->first('course_name') }}</small>
 
                                         </div>
 
-                                        <div class="mb-3 col-md-6">
+                                        {{-- <div class="mb-3 col-md-6">
                                             <label class="form-label">Phone</label>
                                             <input type="number" name="tp"
-                                                class="form-control border border-2 p-2" value='{{$student->Student->tp}}'>
+                                                class="form-control border border-2 p-2" value=''>
                                             <small class="text-danger error error_tp">{{ $errors->first('tp') }}</small>
 
-                                        </div>
+                                        </div> --}}
 
-                                        <div class="mb-3 col-md-6">
+                                        {{-- <div class="mb-3 col-md-6">
                                             <label class="form-label">Gender</label>
                                             <div class="form-group">
-                                                <select class="form-control  border border-2 p-2" id="exampleGender" value='{{$student->Student->gender}}'
+                                                <select class="form-control  border border-2 p-2" id="exampleGender"
                                                     name="gender">
                                                     <option value="male">Male</option>
                                                     <option value="female">Female</option>
@@ -61,14 +62,14 @@
                                             <small
                                                 class="text-danger error error_gender">{{ $errors->first('gender') }}</small>
 
-                                        </div>
+                                        </div> --}}
 
                                         <div class="mb-3 col-md-12">
-                                            <label for="floatingTextarea2">Address</label>
+                                            <label for="floatingTextarea2">Description</label>
                                             <textarea class="form-control border border-2 p-2" placeholder=" Say something about yourself" id="floatingTextarea2"
-                                                name="address" rows="4" cols="50">{{ $student->Student->address}}</textarea>
+                                                name="description" rows="4" cols="50">{{$course->description}}</textarea>
                                             <small
-                                                class="text-danger error error_address">{{ $errors->first('address') }}</small>
+                                                class="text-danger error error_description">{{ $errors->first('description') }}</small>
 
                                         </div>
                                     </div>
@@ -78,11 +79,11 @@
 
 
                         </div>
-                        
+                     
                     </div>
                 </div>
             </div>
-           
+         
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
@@ -91,7 +92,7 @@
     <script>
         $(document).ready(function() {
 
-            $("#studentEditForm").on('submit', function(e) {
+            $("#studentCreateForm").on('submit', function(e) {
                 e.preventDefault();
                 $('.error').text('');
                 $('.form-group').removeClass('border--red');
@@ -101,8 +102,7 @@
                 var method = $(this).attr('method');
 
                 submitForm(action, method, formData);
-                // Assuming you have a form ID "studentCreateForm"
-                $('#studentCreateForm')[0].reset();
+                // $('#studentCreateForm')[0].reset();
 
             });
 
@@ -112,11 +112,7 @@
                 'pageLength': 15,
                 'ajax': {
                     'url': "{{ route('students.getData') }}",
-                    // 'data': function(d) {
-                    //     d.date_range = $("#date_range_value").val();
-                    //     d.receptionist = $("#receptionists").val();
-                    //     d.search_on = $('input[name="filter_on"]:checked').val();
-                    // }
+                    
                 },
                 'processing': true,
                 'serverSide': true,

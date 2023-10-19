@@ -15,7 +15,7 @@
                         </div>
                         <div class="card-body px-0 pb-2 m-2 border rounded">
                             <div class=" me-3 my-3 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="{{ route('students.create') }}"><i
+                                <a class="btn bg-gradient-dark mb-0" href="{{ route('courses.create') }}"><i
                                         class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
                                     Course</a>
                             </div>
