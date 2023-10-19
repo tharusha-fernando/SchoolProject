@@ -15,8 +15,7 @@ class Tutors extends Model
         'dob',
         'pronounce',
         'address',
-        'tp'
-
+        'tp',
     ];
     
     public function User(){

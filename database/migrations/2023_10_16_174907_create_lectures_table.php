@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('lectures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->constrained('courses'); // Foreign key for course
-            $table->foreignId('classroom_id')->constrained('class_rooms'); // Foreign key for classroom
-            $table->foreignId('tutor_id')->constrained('tutors'); // Foreign key for tutor
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade')->onUpdate('cascade'); // Foreign key for course
+            $table->foreignId('classroom_id')->constrained('class_rooms')->onDelete('cascade')->onUpdate('cascade'); // Foreign key for classroom
+            $table->foreignId('tutor_id')->constrained('tutors')->onDelete('cascade')->onUpdate('cascade'); // Foreign key for tutor
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->timestamps();
