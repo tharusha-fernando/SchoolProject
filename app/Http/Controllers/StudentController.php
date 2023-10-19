@@ -115,8 +115,14 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $student)
     {
+        // dd($student);
+        $student->delete();
+        return response()->json(['status' => 'success', 'message' => 'Student Deleted Successfully.'], 200);
+        // return response()->noContent();
+        // flash()->addSuccess('Student Deleted Successfully');
+        // return redirect(route('students.index'));
         //
     }
 
@@ -152,22 +158,25 @@ class StudentController extends Controller
                     return $student->Student ? $student->Student->tp : "";
                 })
                 ->addColumn('actions', function ($student) {
-                    // $route=route('students.edit')
                     $route = route('students.edit', ['student' => $student]);
-                    $deleteRoute = route('students.destroy', ['student' => $student]);
-
+                    // $deleteRoute = route('students.destroy', ['student' => $student]);
+                
                     $htmlContent = '
-                    <a rel="tooltip" class="btn btn-success btn-link" href="' . $route . '" data-original-title="" title="">
-                        <i class="material-icons">edit</i>
-                        <div class="ripple-container"></div>
-                    </a>
-                    
-                    <button type="button" class="btn btn-danger btn-link" data-original-title="" title="">
-                        <i class="material-icons">close</i>
-                        <div class="ripple-container"></div>
+                        <a rel="tooltip" class="btn btn-success btn-link" href="' . $route . '" data-original-title="" title="">
+                            <i class="material-icons">edit</i>
+                            <div class="ripple-container"></div>
+                        </a>
+                        
+                        <button data-id="' . $student->id . '" class="btn btn-danger btn-link deleteBtn" data-original-title="" title="">
+                            <i class="material-icons">close</i>
+                            <div class="ripple-container"></div>
+                        </button>
+                        
                     ';
+                
                     return $htmlContent;
                 })
+                
                 ->rawColumns(['name', 'email','gender','address','tp','actions'])
                 ->make(true);
         } catch (Throwable $th) {

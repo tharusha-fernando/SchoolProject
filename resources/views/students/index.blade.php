@@ -16,12 +16,13 @@
                         {{-- assassas --}}
                         <div class="card-body px-0 pb-2 m-2 border rounded">
                             <div class=" me-3 my-3 text-end">
-                                <a class="btn bg-gradient-dark mb-0" href="{{route('students.create')}}"><i
+                                <a class="btn bg-gradient-dark mb-0" href="{{ route('students.create') }}"><i
                                         class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New
                                     User</a>
                             </div>
                             <div class="table-responsive  m-2 p-2">
-                                <table id="studentsDataTable" class="table align-items-center" cellspacing="0" width="100%">
+                                <table id="studentsDataTable" class="table align-items-center" cellspacing="0"
+                                    width="100%">
                                     <thead>
                                         <tr>
                                             {{-- <th>Appointment Reference</th> --}}
@@ -39,7 +40,7 @@
                                     </thead>
                                 </table>
                             </div>
-                            
+
                         </div>
                         {{-- <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
@@ -546,9 +547,37 @@
     <x-plugins>
     </x-plugins>
     <script>
-            
         $(document).ready(function() {
 
+            $(document).on("click", ".deleteBtn", function() {
+                var studentId = $(this).data('id');
+                var url =
+                    '{{ route('students.destroy', ['student' => '__studentId']) }}'
+                    .replace('__studentId', studentId);
+
+                    var studentId = $(this).data('id');
+                var url =
+                    '{{ route('students.destroy', ['student' => '__studentId']) }}'
+                    .replace('__studentId', studentId);
+
+                var confirmDelete = confirm("Are you sure you want to delete?");
+
+                if (confirmDelete) {
+                    // If the user confirms, navigate to the link
+                    // window.location.href = url;
+                    deleteData(url, table,studentId);
+                }
+
+                // Swal.fire({
+                //     title: 'Do you want to remove this Blacklisted User?',
+                //     showCancelButton: true,
+                //     confirmButtonText: 'Delete',
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                //         destroyData(url, table);
+                //     }
+                // })
+            });
 
             var table = $('#studentsDataTable').DataTable({
                 'lengthMenu': [15, 30, 50, 100],
@@ -608,7 +637,14 @@
                     [0, 'desc']
                 ],
                 'columnDefs': [
-
+                    // {
+                    //     "targets": 3,
+                    //     "width": "60px",
+                    // },
+                    {
+                        "targets": 3,
+                        "width": "60px",
+                    },
                 ],
             });
 

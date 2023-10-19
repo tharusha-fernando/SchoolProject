@@ -163,17 +163,67 @@
         }
 
         function displayValidationErrors(errors) {
-        $.each(errors, function(key, value) {
-            var error = '';
-            $.each(value, function(index, errorMessage) {
-                error = error + errorMessage + ' '
+            $.each(errors, function(key, value) {
+                var error = '';
+                $.each(value, function(index, errorMessage) {
+                    error = error + errorMessage + ' '
+                });
+                $(".error_" + key).text(error);
+                $(".error_" + key).closest('.form-group').addClass(
+                    'border--red');
             });
-            $(".error_" + key).text(error);
-            $(".error_" + key).closest('.form-group').addClass(
-                'border--red');
-        });
-    }
+        }
 
+
+        function deleteData(url, table = null,id=null) {
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                // type: 'DELETE',
+                data: {
+                    'id': id,
+                    '_token': '{{ csrf_token() }}',
+                },
+                // headers: {
+                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                // },
+                beforeSend: function() {
+                    showLoading();
+                },
+                success: function(response, status, xhr) {
+                    if (xhr.status === 200) {
+                        flasher.success(response.message);
+                        if (table) {
+                            table.ajax.reload();
+                        }
+                    } else if (xhr.status === 203) {
+                        flasher.warning('You cannot change logged user details.');
+                    } else {
+                        flasher.error("Internal server error.");
+                    }
+                },
+                error: function(xhr) {
+                    flasher.error("Internal Server Error.");
+                },
+                complete: function() {
+                    hideLoading();
+                }
+            });
+        }
+
+        // document.addEventListener("DOMContentLoaded", function() {
+        //     var deleteButtons = document.querySelectorAll(".delete-btn");
+
+        //     deleteButtons.forEach(function(button) {
+        //         button.addEventListener("click", function(event) {
+        //             var confirmDelete = window.confirm("Are you sure you want to delete?");
+
+        //             if (!confirmDelete) {
+        //                 event.preventDefault();
+        //             }
+        //         });
+        //     });
+        // });
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
