@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateStudentRequest;
+use App\Http\Requests\UpdateStudenRequest;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -71,16 +72,43 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $student)
     {
+        $student->load('Student');
+
+        // dd($student);
+        return view('students.edit',compact('student'));
+
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateStudenRequest $request, User $student)
     {
+        $validatedData=$request->validated();
+
+        $student->update([
+            'name'=>$validatedData['name'],
+            'email'=>$validatedData['email'],
+            // 'password'=>bcrypt('12345678'),//$validatedData['email']
+        ]);
+        // $user->addRole('student');
+
+        $student->Student->update([
+            'address'=>$validatedData['address'],
+            'tp'=>$validatedData['tp'],
+            'gender'=>$validatedData['gender'],
+            'address'=>$validatedData['address'],
+            // 'user_id'=>$user->id,
+            // 'dob'=>fake()->date(),
+            // 'pronounce'=>fake()->word()
+        ]);
+        return response()->json(['message'=>"Student Updated Successfully"],200);
+
+        // dd($student,$validatedData);
+        
         //
     }
 

@@ -16,7 +16,7 @@
                         {{-- assassas --}}
                         <div class="card-body px-0 pb-2 m-2">
                             <div class="px-0 pb-2 m-2">
-                                <form method='POST' action='{{ route('students.store') }}' id="studentCreateForm">
+                                <form method='PUT' action='{{ route('students.update', ['student' => $student]) }}' id="studentEditForm">
                                     @csrf
                                     <div class="row">
 
@@ -24,7 +24,7 @@
                                             <label class="form-label">Email address</label>
                                             <input type="email" name="email"
                                                 class="form-control border border-2 p-2"
-                                                value='{{ old('email', auth()->user()->email) }}'>
+                                                value='{{ $student->email}}'>
                                             <small
                                                 class="text-danger error error_email">{{ $errors->first('email') }}</small>
 
@@ -34,7 +34,7 @@
                                             <label class="form-label">Name</label>
                                             <input type="text" name="name"
                                                 class="form-control border border-2 p-2"
-                                                value='{{ old('name', auth()->user()->name) }}'>
+                                                value='{{ $student->name }}'>
                                             <small
                                                 class="text-danger error error_name">{{ $errors->first('name') }}</small>
 
@@ -43,7 +43,7 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Phone</label>
                                             <input type="number" name="tp"
-                                                class="form-control border border-2 p-2" value=''>
+                                                class="form-control border border-2 p-2" value='{{$student->Student->tp}}'>
                                             <small class="text-danger error error_tp">{{ $errors->first('tp') }}</small>
 
                                         </div>
@@ -51,7 +51,7 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Gender</label>
                                             <div class="form-group">
-                                                <select class="form-control  border border-2 p-2" id="exampleGender"
+                                                <select class="form-control  border border-2 p-2" id="exampleGender" value='{{$student->Student->gender}}'
                                                     name="gender">
                                                     <option value="male">Male</option>
                                                     <option value="female">Female</option>
@@ -68,7 +68,7 @@
                                         <div class="mb-3 col-md-12">
                                             <label for="floatingTextarea2">Address</label>
                                             <textarea class="form-control border border-2 p-2" placeholder=" Say something about yourself" id="floatingTextarea2"
-                                                name="address" rows="4" cols="50">{{ old('about', auth()->user()->about) }}</textarea>
+                                                name="address" rows="4" cols="50">{{ $student->Student->address}}</textarea>
                                             <small
                                                 class="text-danger error error_address">{{ $errors->first('address') }}</small>
 
@@ -587,7 +587,7 @@
     <script>
         $(document).ready(function() {
 
-            $("#studentCreateForm").on('submit', function(e) {
+            $("#studentEditForm").on('submit', function(e) {
                 e.preventDefault();
                 $('.error').text('');
                 $('.form-group').removeClass('border--red');
