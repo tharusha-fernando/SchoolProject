@@ -11,7 +11,7 @@ class UpdateTutorsRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,6 +22,15 @@ class UpdateTutorsRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name'=>'required',
+            // 'email'=>['required','unique:users,email'],
+            'email'=>['required'], // ,'unique:users,email'   removed 
+            // 'password'=>bcrypt($validatedData['email']),
+            'address'=>'required',
+            'tp'=>'required',
+            'gender'=>'required',
+            'address'=>'required',
+            'courses'=>'required',
             //
         ];
     }

@@ -80,16 +80,44 @@ class TutorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tutors $tutors)
+    public function edit(User $tutor)
     {
+        $tutor->load('Tutor');
+        $Courses=Course::all();
+
+        return view('tutor.edit',compact('tutor','Courses'));
+
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTutorsRequest $request, Tutors $tutors)
+    public function update(UpdateTutorsRequest $request, User $tutor)
     {
+        $validatedData = $request->validated();
+        // dd($validatedData);
+        $tutor->load('Tutor');
+        // dd($tutor);
+        $tutor->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+        ]);
+
+        $tutor->Tutor->update([
+            'address' => $validatedData['address'],
+            'tp' => $validatedData['tp'],
+            'gender' => $validatedData['gender'],
+            'address' => $validatedData['address'],
+        ]);
+
+        $tutor->Tutor->Course()->detach();
+        foreach ($validatedData['courses'] as $courseId) {
+            $tutor->Tutor->Course()->attach($courseId);
+        }
+
+
+        return response()->json(['message' => "Tutor Updated Successfully"], 200);
         //
     }
 
@@ -144,7 +172,7 @@ class TutorsController extends Controller
                     // return $tutor->Tutor ? $tutor->Tutor->tp : "";
                 })
                 ->addColumn('actions', function ($tutor) {
-                    $route = route('students.edit', ['student' => $tutor]);
+                    $route = route('tutors.edit', ['tutor' => $tutor]);
 
                     $htmlContent = '
                         <a rel="tooltip" class="btn btn-success btn-link" href="' . $route . '" data-original-title="" title="">

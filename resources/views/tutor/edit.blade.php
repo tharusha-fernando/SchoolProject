@@ -10,20 +10,20 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Add Students</h6>
+                                <h6 class="text-white text-capitalize ps-3">Edit Tutors</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2 m-2">
                             <div class="px-0 pb-2 m-2">
-                                <form method='PUT' action='{{ route('students.update', ['student' => $student]) }}' id="studentEditForm">
+                                <form method='PUT' action='{{ route('tutors.update', ['tutor' => $tutor]) }}'
+                                    id="tutorEditForm">
                                     @csrf
                                     <div class="row">
 
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Email address</label>
                                             <input type="email" name="email"
-                                                class="form-control border border-2 p-2"
-                                                value='{{ $student->email}}'>
+                                                class="form-control border border-2 p-2" value='{{ $tutor->email }}'>
                                             <small
                                                 class="text-danger error error_email">{{ $errors->first('email') }}</small>
 
@@ -32,8 +32,7 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Name</label>
                                             <input type="text" name="name"
-                                                class="form-control border border-2 p-2"
-                                                value='{{ $student->name }}'>
+                                                class="form-control border border-2 p-2" value='{{ $tutor->name }}'>
                                             <small
                                                 class="text-danger error error_name">{{ $errors->first('name') }}</small>
 
@@ -42,7 +41,8 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Phone</label>
                                             <input type="number" name="tp"
-                                                class="form-control border border-2 p-2" value='{{$student->Student->tp}}'>
+                                                class="form-control border border-2 p-2"
+                                                value='{{ $tutor->Tutor->tp }}'>
                                             <small class="text-danger error error_tp">{{ $errors->first('tp') }}</small>
 
                                         </div>
@@ -50,8 +50,8 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Gender</label>
                                             <div class="form-group">
-                                                <select class="form-control  border border-2 p-2" id="exampleGender" value='{{$student->Student->gender}}'
-                                                    name="gender">
+                                                <select class="form-control  border border-2 p-2" id="exampleGender"
+                                                    value='{{ $tutor->Tutor->gender }}' name="gender">
                                                     <option value="male">Male</option>
                                                     <option value="female">Female</option>
                                                     <option value="non-binary">Non-Binary</option>
@@ -66,11 +66,24 @@
                                         <div class="mb-3 col-md-12">
                                             <label for="floatingTextarea2">Address</label>
                                             <textarea class="form-control border border-2 p-2" placeholder=" Say something about yourself" id="floatingTextarea2"
-                                                name="address" rows="4" cols="50">{{ $student->Student->address}}</textarea>
+                                                name="address" rows="4" cols="50">{{ $tutor->Tutor->address }}</textarea>
                                             <small
                                                 class="text-danger error error_address">{{ $errors->first('address') }}</small>
 
                                         </div>
+
+                                        <div class="mb-3 col-md-12">
+                                            <label for="floatingTextarea2">Courses</label>
+                                            <select class="form-control border border-2 p-2" id="courses" name="courses[]" multiple>
+                                                @foreach ($Courses as $course)
+                                                    <option value="{{ $course->id }}" {{ in_array($course->id, $tutor->Tutor->Course->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                                        {{ $course->course_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <small class="text-danger error error_address">{{ $errors->first('address') }}</small>
+                                        </div>
+                                        
                                     </div>
                                     <button type="submit" class="btn bg-gradient-dark">Submit</button>
                                 </form>
@@ -78,11 +91,11 @@
 
 
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
-           
+
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
@@ -91,7 +104,7 @@
     <script>
         $(document).ready(function() {
 
-            $("#studentEditForm").on('submit', function(e) {
+            $("#tutorEditForm").on('submit', function(e) {
                 e.preventDefault();
                 $('.error').text('');
                 $('.form-group').removeClass('border--red');
