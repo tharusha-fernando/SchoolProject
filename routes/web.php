@@ -22,6 +22,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TutorsController;
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
@@ -78,6 +79,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::group(['middleware' => ['role:administrator']], function() {
 		Route::resource('students',StudentController::class);
 		Route::get('/students-get-data',[StudentController::class,'getData'])->name('students.getData');
+
+		Route::resource('tutors',TutorsController::class);
+		Route::get('/tutors-get-data',[TutorsController::class,'getData'])->name('tutors.getData');
 	});
 	
 

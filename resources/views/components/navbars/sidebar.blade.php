@@ -60,7 +60,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white {{ $activePage == 'tutors' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('students.index') }}">
+                        href="{{ route('tutors.index') }}">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">dashboard</i>
                         </div>
