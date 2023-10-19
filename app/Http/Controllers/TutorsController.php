@@ -96,9 +96,7 @@ class TutorsController extends Controller
     public function update(UpdateTutorsRequest $request, User $tutor)
     {
         $validatedData = $request->validated();
-        // dd($validatedData);
         $tutor->load('Tutor');
-        // dd($tutor);
         $tutor->update([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
@@ -124,8 +122,12 @@ class TutorsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tutors $tutors)
+    public function destroy($id)
     {
+        $tutor=User::find($id);
+        // dd($tutor);
+        $tutor->delete();
+        return response()->json(['status' => 'success', 'message' => 'Tutor Deleted Successfully.'], 200);
         //
     }
 

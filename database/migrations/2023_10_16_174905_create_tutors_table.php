@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tutors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(); // Assuming you have a users table
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade'); // Assuming you have a users table
             $table->string('gender');
             $table->date('dob');
             $table->string('tp');

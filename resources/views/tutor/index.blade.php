@@ -53,21 +53,21 @@
         $(document).ready(function() {
 
             $(document).on("click", ".deleteBtn", function() {
-                var studentId = $(this).data('id');
+                var tutorId = $(this).data('id');
                 var url =
-                    '{{ route('students.destroy', ['student' => '__studentId']) }}'
-                    .replace('__studentId', studentId);
+                    '{{ route('tutors.destroy', ['tutor' => '__tutorId']) }}'
+                    .replace('__tutorId', tutorId);
 
                     var studentId = $(this).data('id');
                 var url =
-                    '{{ route('students.destroy', ['student' => '__studentId']) }}'
-                    .replace('__studentId', studentId);
+                    '{{ route('tutors.destroy', ['tutor' => '__tutorId']) }}'
+                    .replace('__tutorId', tutorId);
 
                 var confirmDelete = confirm("Are you sure you want to delete?");
 
                 if (confirmDelete) {
                    
-                    deleteData(url, table,studentId);
+                    deleteData(url, table,tutorId);
                 }
 
              
