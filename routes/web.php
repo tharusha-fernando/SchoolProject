@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminsController;
+use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -86,6 +87,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::resource('admins',AdminsController::class);
 		Route::get('/admins-get-data',[AdminsController::class,'getData'])->name('admins.getData');
+
+		Route::resource('courses',CourseController::class);
+		Route::get('/courses-get-data',[CourseController::class,'getData'])->name('courses.getData');
 	});
 	
 
