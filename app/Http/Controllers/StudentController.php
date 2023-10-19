@@ -36,7 +36,6 @@ class StudentController extends Controller
     public function store(CreateStudentRequest $request)
     {
         $validatedData=$request->validated();
-        // dd($validatedData);
 
         $user=User::create([
             'name'=>$validatedData['name'],
@@ -76,7 +75,6 @@ class StudentController extends Controller
     {
         $student->load('Student');
 
-        // dd($student);
         return view('students.edit',compact('student'));
 
         //
@@ -92,22 +90,16 @@ class StudentController extends Controller
         $student->update([
             'name'=>$validatedData['name'],
             'email'=>$validatedData['email'],
-            // 'password'=>bcrypt('12345678'),//$validatedData['email']
         ]);
-        // $user->addRole('student');
 
         $student->Student->update([
             'address'=>$validatedData['address'],
             'tp'=>$validatedData['tp'],
             'gender'=>$validatedData['gender'],
             'address'=>$validatedData['address'],
-            // 'user_id'=>$user->id,
-            // 'dob'=>fake()->date(),
-            // 'pronounce'=>fake()->word()
+           
         ]);
         return response()->json(['message'=>"Student Updated Successfully"],200);
-
-        // dd($student,$validatedData);
         
         //
     }
@@ -117,12 +109,8 @@ class StudentController extends Controller
      */
     public function destroy(User $student)
     {
-        // dd($student);
         $student->delete();
         return response()->json(['status' => 'success', 'message' => 'Student Deleted Successfully.'], 200);
-        // return response()->noContent();
-        // flash()->addSuccess('Student Deleted Successfully');
-        // return redirect(route('students.index'));
         //
     }
 
@@ -135,7 +123,6 @@ class StudentController extends Controller
     public function getData(Request $request)
     {
         try {
-            // dd("assasasasa");
             $students = User::query()
                 ->with('Student')
                 ->whereHas('role', function ($query) {
@@ -159,7 +146,6 @@ class StudentController extends Controller
                 })
                 ->addColumn('actions', function ($student) {
                     $route = route('students.edit', ['student' => $student]);
-                    // $deleteRoute = route('students.destroy', ['student' => $student]);
                 
                     $htmlContent = '
                         <a rel="tooltip" class="btn btn-success btn-link" href="' . $route . '" data-original-title="" title="">
