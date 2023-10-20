@@ -15,12 +15,12 @@
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-xl mb-0 text-capitalize">Lectures this week</p>
-                                <h4 class="mb-0">{{$lectureCount}}</h4>
+                                <h4 class="mb-0">{{ $lectureCount }}</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -33,12 +33,12 @@
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-xl mb-0 text-capitalize">Tutors</p>
-                                <h4 class="mb-0">{{$tutorCount}}</h4>
+                                <h4 class="mb-0">{{ $tutorCount }}</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -51,12 +51,12 @@
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-xl mb-0 text-capitalize">Students</p>
-                                <h4 class="mb-0">{{$studentCount}}</h4>
+                                <h4 class="mb-0">{{ $studentCount }}</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -69,12 +69,12 @@
                             </div>
                             <div class="text-end pt-1">
                                 <p class="text-xl mb-0 text-capitalize">Courses</p>
-                                <h4 class="mb-0">{{$courseCount}}</h4>
+                                <h4 class="mb-0">{{ $courseCount }}</h4>
                             </div>
                         </div>
                         <hr class="dark horizontal my-0">
                         <div class="card-footer p-3">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -149,10 +149,10 @@
                             <div class="row">
                                 <div class="col-lg-6 col-7">
                                     <h4>Todays Lectures</h4>
-                                    <p class="text-sm mb-0">
+                                    {{-- <p class="text-sm mb-0">
                                         <i class="fa fa-check text-info" aria-hidden="true"></i>
                                         <span class="font-weight-bold ms-1">30 done</span> this month
-                                    </p>
+                                    </p> --}}
                                 </div>
                                 <div class="col-lg-6 col-5 my-auto text-end">
                                     <div class="dropdown float-lg-end pe-4">
@@ -180,74 +180,142 @@
                                         <tr>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Companies</th>
+                                                Course</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Members</th>
+                                                Class Room</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Budget</th>
+                                                Tutor</th>
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Completion</th>
+                                                Date</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
-                                                            class="avatar avatar-sm me-3" alt="xd">
-                                                    </div>
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">Material XD Version</h6>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="avatar-group mt-2">
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Ryan Tompson">
-                                                        <img src="{{ asset('assets') }}/img/team-1.jpg" alt="team1">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Romina Hadid">
-                                                        <img src="{{ asset('assets') }}/img/team-2.jpg" alt="team2">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Alexander Smith">
-                                                        <img src="{{ asset('assets') }}/img/team-3.jpg" alt="team3">
-                                                    </a>
-                                                    <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                        title="Jessica Doe">
-                                                        <img src="{{ asset('assets') }}/img/team-4.jpg" alt="team4">
-                                                    </a>
-                                                </div>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span class="text-xs font-weight-bold"> $14,000 </span>
-                                            </td>
-                                            <td class="align-middle">
-                                                <div class="progress-wrapper w-75 mx-auto">
-                                                    <div class="progress-info">
-                                                        <div class="progress-percentage">
-                                                            <span class="text-xs font-weight-bold">60%</span>
+                                        @foreach ($todaysLectures as $todaysLecture)
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        {{-- <div>
+                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
+                                                                class="avatar avatar-sm me-3" alt="xd">
+                                                        </div> --}}
+                                                        <div>
+                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-slack.svg"
+                                                                class="avatar avatar-sm me-3" alt="team7">
+                                                        </div>
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{$todaysLecture->Course->course_name}}</h6>
                                                         </div>
                                                     </div>
-                                                    <div class="progress">
-                                                        <div class="progress-bar bg-gradient-info w-60"
-                                                            role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        {{-- <div>
+                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
+                                                                class="avatar avatar-sm me-3" alt="xd">
+                                                        </div> --}}
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{$todaysLecture->ClassRoom->namee}}</h6>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        {{-- <div>
+                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
+                                                                class="avatar avatar-sm me-3" alt="xd">
+                                                        </div> --}}
+                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                            title="Ryan Tompson">
+                                                            <img src="{{ asset('assets') }}/img/team-1.jpg"
+                                                                alt="team1">
+                                                        </a>
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{$todaysLecture->Tutor->User->name}}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        {{-- <div>
+                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
+                                                                class="avatar avatar-sm me-3" alt="xd">
+                                                        </div> --}}
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{$todaysLecture->date}}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        {{-- <div>
+                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
+                                                                class="avatar avatar-sm me-3" alt="xd">
+                                                        </div> --}}
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">{{$todaysLecture->start_time}} - {{$todaysLecture->end_time}}</h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                             
+                                                {{-- <td class="align-middle text-center text-sm">
+                                                    <span class="text-xs font-weight-bold"> $14,000 </span>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <div class="progress-wrapper w-75 mx-auto">
+                                                        <div class="progress-info">
+                                                            <div class="progress-percentage">
+                                                                <span class="text-xs font-weight-bold">60%</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-gradient-info w-60"
+                                                                role="progressbar" aria-valuenow="60"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                </td> --}}
+                                            </tr>
+                                        @endforeach
+
+                                           {{-- <td>
+                                                    <div class="avatar-group mt-2">
+                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                            title="Ryan Tompson">
+                                                            <img src="{{ asset('assets') }}/img/team-1.jpg"
+                                                                alt="team1">
+                                                        </a>
+                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                            title="Romina Hadid">
+                                                            <img src="{{ asset('assets') }}/img/team-2.jpg"
+                                                                alt="team2">
+                                                        </a>
+                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                            title="Alexander Smith">
+                                                            <img src="{{ asset('assets') }}/img/team-3.jpg"
+                                                                alt="team3">
+                                                        </a>
+                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
+                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                            title="Jessica Doe">
+                                                            <img src="{{ asset('assets') }}/img/team-4.jpg"
+                                                                alt="team4">
+                                                        </a>
+                                                    </div>
+                                                </td> --}}
+
+                                        {{-- <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
@@ -290,8 +358,8 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
-                                        <tr>
+                                        </tr> --}}
+                                        {{-- <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
@@ -334,8 +402,8 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
-                                        <tr>
+                                        </tr> --}}
+                                        {{-- <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
@@ -388,8 +456,8 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
-                                        <tr>
+                                        </tr> --}}
+                                        {{-- <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
@@ -427,8 +495,8 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
-                                        <tr>
+                                        </tr> --}}
+                                        {{-- <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
                                                     <div>
@@ -471,14 +539,14 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-              
+
             </div>
             <x-footers.auth></x-footers.auth>
         </div>
@@ -486,254 +554,253 @@
     <x-plugins></x-plugins>
     </div>
     @push('js')
-    <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
-    <script>
-        var ctx = document.getElementById("chart-bars").getContext("2d");
+        <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
+        <script>
+            var ctx = document.getElementById("chart-bars").getContext("2d");
 
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: ["M", "T", "W", "T", "F", "S", "S"],
-                datasets: [{
-                    label: "Sales",
-                    tension: 0.4,
-                    borderWidth: 0,
-                    borderRadius: 4,
-                    borderSkipped: false,
-                    backgroundColor: "rgba(255, 255, 255, .8)",
-                    data: [50, 20, 10, 22, 50, 10, 40],
-                    maxBarThickness: 6
-                }, ],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
+            new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["M", "T", "W", "T", "F", "S", "S"],
+                    datasets: [{
+                        label: "Sales",
+                        tension: 0.4,
+                        borderWidth: 0,
+                        borderRadius: 4,
+                        borderSkipped: false,
+                        backgroundColor: "rgba(255, 255, 255, .8)",
+                        data: [50, 20, 10, 22, 50, 10, 40],
+                        maxBarThickness: 6
+                    }, ],
                 },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5],
-                            color: 'rgba(255, 255, 255, .2)'
-                        },
-                        ticks: {
-                            suggestedMin: 0,
-                            suggestedMax: 500,
-                            beginAtZero: true,
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                            color: "#fff"
-                        },
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5],
-                            color: 'rgba(255, 255, 255, .2)'
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#f8f9fa',
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                },
-            },
-        });
-
-
-        var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-        new Chart(ctx2, {
-            type: "line",
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Mobile apps",
-                    tension: 0,
-                    borderWidth: 0,
-                    pointRadius: 5,
-                    pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                    pointBorderColor: "transparent",
-                    borderColor: "rgba(255, 255, 255, .8)",
-                    borderColor: "rgba(255, 255, 255, .8)",
-                    borderWidth: 4,
-                    backgroundColor: "transparent",
-                    fill: true,
-                    data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-                    maxBarThickness: 6
-
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5],
-                            color: 'rgba(255, 255, 255, .2)'
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#f8f9fa',
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
-                    },
-                    x: {
-                        grid: {
-                            drawBorder: false,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
                             display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#f8f9fa',
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
                         }
                     },
-                },
-            },
-        });
-
-        var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
-
-        new Chart(ctx3, {
-            type: "line",
-            data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Mobile apps",
-                    tension: 0,
-                    borderWidth: 0,
-                    pointRadius: 5,
-                    pointBackgroundColor: "rgba(255, 255, 255, .8)",
-                    pointBorderColor: "transparent",
-                    borderColor: "rgba(255, 255, 255, .8)",
-                    borderWidth: 4,
-                    backgroundColor: "transparent",
-                    fill: true,
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                    maxBarThickness: 6
-
-                }],
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false,
-                    }
-                },
-                interaction: {
-                    intersect: false,
-                    mode: 'index',
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            drawBorder: false,
-                            display: true,
-                            drawOnChartArea: true,
-                            drawTicks: false,
-                            borderDash: [5, 5],
-                            color: 'rgba(255, 255, 255, .2)'
-                        },
-                        ticks: {
-                            display: true,
-                            padding: 10,
-                            color: '#f8f9fa',
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
-                        }
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
                     },
-                    x: {
-                        grid: {
-                            drawBorder: false,
+                    scales: {
+                        y: {
+                            grid: {
+                                drawBorder: false,
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                borderDash: [5, 5],
+                                color: 'rgba(255, 255, 255, .2)'
+                            },
+                            ticks: {
+                                suggestedMin: 0,
+                                suggestedMax: 500,
+                                beginAtZero: true,
+                                padding: 10,
+                                font: {
+                                    size: 14,
+                                    weight: 300,
+                                    family: "Roboto",
+                                    style: 'normal',
+                                    lineHeight: 2
+                                },
+                                color: "#fff"
+                            },
+                        },
+                        x: {
+                            grid: {
+                                drawBorder: false,
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                borderDash: [5, 5],
+                                color: 'rgba(255, 255, 255, .2)'
+                            },
+                            ticks: {
+                                display: true,
+                                color: '#f8f9fa',
+                                padding: 10,
+                                font: {
+                                    size: 14,
+                                    weight: 300,
+                                    family: "Roboto",
+                                    style: 'normal',
+                                    lineHeight: 2
+                                },
+                            }
+                        },
+                    },
+                },
+            });
+
+
+            var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+            new Chart(ctx2, {
+                type: "line",
+                data: {
+                    labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                        label: "Mobile apps",
+                        tension: 0,
+                        borderWidth: 0,
+                        pointRadius: 5,
+                        pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                        pointBorderColor: "transparent",
+                        borderColor: "rgba(255, 255, 255, .8)",
+                        borderColor: "rgba(255, 255, 255, .8)",
+                        borderWidth: 4,
+                        backgroundColor: "transparent",
+                        fill: true,
+                        data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+                        maxBarThickness: 6
+
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
                             display: false,
-                            drawOnChartArea: false,
-                            drawTicks: false,
-                            borderDash: [5, 5]
-                        },
-                        ticks: {
-                            display: true,
-                            color: '#f8f9fa',
-                            padding: 10,
-                            font: {
-                                size: 14,
-                                weight: 300,
-                                family: "Roboto",
-                                style: 'normal',
-                                lineHeight: 2
-                            },
                         }
                     },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    scales: {
+                        y: {
+                            grid: {
+                                drawBorder: false,
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                borderDash: [5, 5],
+                                color: 'rgba(255, 255, 255, .2)'
+                            },
+                            ticks: {
+                                display: true,
+                                color: '#f8f9fa',
+                                padding: 10,
+                                font: {
+                                    size: 14,
+                                    weight: 300,
+                                    family: "Roboto",
+                                    style: 'normal',
+                                    lineHeight: 2
+                                },
+                            }
+                        },
+                        x: {
+                            grid: {
+                                drawBorder: false,
+                                display: false,
+                                drawOnChartArea: false,
+                                drawTicks: false,
+                                borderDash: [5, 5]
+                            },
+                            ticks: {
+                                display: true,
+                                color: '#f8f9fa',
+                                padding: 10,
+                                font: {
+                                    size: 14,
+                                    weight: 300,
+                                    family: "Roboto",
+                                    style: 'normal',
+                                    lineHeight: 2
+                                },
+                            }
+                        },
+                    },
                 },
-            },
-        });
+            });
 
-    </script>
+            var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+
+            new Chart(ctx3, {
+                type: "line",
+                data: {
+                    labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                    datasets: [{
+                        label: "Mobile apps",
+                        tension: 0,
+                        borderWidth: 0,
+                        pointRadius: 5,
+                        pointBackgroundColor: "rgba(255, 255, 255, .8)",
+                        pointBorderColor: "transparent",
+                        borderColor: "rgba(255, 255, 255, .8)",
+                        borderWidth: 4,
+                        backgroundColor: "transparent",
+                        fill: true,
+                        data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+                        maxBarThickness: 6
+
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    scales: {
+                        y: {
+                            grid: {
+                                drawBorder: false,
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                borderDash: [5, 5],
+                                color: 'rgba(255, 255, 255, .2)'
+                            },
+                            ticks: {
+                                display: true,
+                                padding: 10,
+                                color: '#f8f9fa',
+                                font: {
+                                    size: 14,
+                                    weight: 300,
+                                    family: "Roboto",
+                                    style: 'normal',
+                                    lineHeight: 2
+                                },
+                            }
+                        },
+                        x: {
+                            grid: {
+                                drawBorder: false,
+                                display: false,
+                                drawOnChartArea: false,
+                                drawTicks: false,
+                                borderDash: [5, 5]
+                            },
+                            ticks: {
+                                display: true,
+                                color: '#f8f9fa',
+                                padding: 10,
+                                font: {
+                                    size: 14,
+                                    weight: 300,
+                                    family: "Roboto",
+                                    style: 'normal',
+                                    lineHeight: 2
+                                },
+                            }
+                        },
+                    },
+                },
+            });
+        </script>
     @endpush
 </x-layout>

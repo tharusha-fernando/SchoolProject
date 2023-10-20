@@ -25,8 +25,9 @@ class LectureFactory extends Factory
             'course_id' => Course::inRandomOrder()->first()->id, // Replace with logic to get valid course_id
             'classroom_id' => ClassRoom::inRandomOrder()->first()->id, // Replace with logic to get valid classroom_id
             'tutor_id' => $user, // Replace with logic to get valid tutor_id
-            'start_time' => $this->faker->dateTimeBetween('now', '+1 week'),
-            'end_time' => $this->faker->dateTimeBetween('+1 week', '+2 weeks'),
+            'date' => $this->faker->dateTimeBetween('now', '+1 week'),
+            'start_time' => $this->faker->time(),
+            'end_time' => $this->faker->time,
         ];
         // return [
         //     //

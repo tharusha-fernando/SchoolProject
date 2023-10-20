@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LectureController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -90,6 +91,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::resource('courses',CourseController::class);
 		Route::get('/courses-get-data',[CourseController::class,'getData'])->name('courses.getData');
+
+		Route::resource('lectures',LectureController::class);
+		Route::get('/lectures-get-data',[LectureController::class,'getData'])->name('lectures.getData');
 	});
 	
 

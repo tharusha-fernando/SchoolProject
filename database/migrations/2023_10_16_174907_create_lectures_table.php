@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('course_id')->constrained('courses')->onDelete('cascade')->onUpdate('cascade'); // Foreign key for course
             $table->foreignId('classroom_id')->constrained('class_rooms')->onDelete('cascade')->onUpdate('cascade'); // Foreign key for classroom
             $table->foreignId('tutor_id')->constrained('tutors')->onDelete('cascade')->onUpdate('cascade'); // Foreign key for tutor
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }

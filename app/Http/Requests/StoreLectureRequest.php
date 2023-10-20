@@ -11,7 +11,7 @@ class StoreLectureRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,6 +22,13 @@ class StoreLectureRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'tutor_id'=>'required|exists:tutors,id',
+            'course_id'=>'required|exists:courses,id',
+            'classroom_id'=>'required|exists:class_rooms,id',
+            'time_slot'=>'required',
+            'date'=>'required',
+
+
             //
         ];
     }

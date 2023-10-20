@@ -15,6 +15,7 @@ class Lecture extends Model
         'tutor_id',
         'start_time',
         'end_time',
+        'date',
     ];
 
 
@@ -23,7 +24,7 @@ class Lecture extends Model
     }
 
     public function ClassRoom(){
-        return $this->belongsTo(ClassRoom::class);
+        return $this->belongsTo(ClassRoom::class,'classroom_id');
     }
 
     public function Tutor(){
