@@ -79,7 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	
 
-	Route::group(['middleware' => ['role:administrator']], function() {
+	Route::group(['middleware' => ['role:administrator|superadministrator']], function() {
 		Route::resource('students',StudentController::class);
 		Route::get('/students-get-data',[StudentController::class,'getData'])->name('students.getData');
 

@@ -32,18 +32,18 @@
                                             <th>Courses</th>
 
                                             <th>Actions</th>
-                                            
+
                                         </tr>
                                     </thead>
                                 </table>
                             </div>
 
                         </div>
-                      
+
                     </div>
                 </div>
             </div>
-         
+
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
@@ -58,7 +58,7 @@
                     '{{ route('tutors.destroy', ['tutor' => '__tutorId']) }}'
                     .replace('__tutorId', tutorId);
 
-                    var studentId = $(this).data('id');
+                var studentId = $(this).data('id');
                 var url =
                     '{{ route('tutors.destroy', ['tutor' => '__tutorId']) }}'
                     .replace('__tutorId', tutorId);
@@ -66,11 +66,11 @@
                 var confirmDelete = confirm("Are you sure you want to delete?");
 
                 if (confirmDelete) {
-                   
-                    deleteData(url, table,tutorId);
+
+                    deleteData(url, table, tutorId);
                 }
 
-             
+
             });
 
             var table = $('#tutorsDataTable').DataTable({
@@ -78,7 +78,7 @@
                 'pageLength': 15,
                 'ajax': {
                     'url': "{{ route('tutors.getData') }}",
-                   
+
                 },
                 'processing': true,
                 'serverSide': true,
@@ -133,7 +133,7 @@
                     [0, 'desc']
                 ],
                 'columnDefs': [
-                    
+
                     {
                         "targets": 3,
                         "width": "100px",

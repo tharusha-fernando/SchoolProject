@@ -74,16 +74,19 @@
 
                                         <div class="mb-3 col-md-12">
                                             <label for="floatingTextarea2">Courses</label>
-                                            <select class="form-control border border-2 p-2" id="courses" name="courses[]" multiple>
+                                            <select class="form-control border border-2 p-2" id="courses"
+                                                name="courses[]" multiple>
                                                 @foreach ($Courses as $course)
-                                                    <option value="{{ $course->id }}" {{ in_array($course->id, $tutor->Tutor->Course->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                                    <option value="{{ $course->id }}"
+                                                        {{ in_array($course->id, $tutor->Tutor->Course->pluck('id')->toArray()) ? 'selected' : '' }}>
                                                         {{ $course->course_name }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <small class="text-danger error error_address">{{ $errors->first('address') }}</small>
+                                            <small
+                                                class="text-danger error error_address">{{ $errors->first('address') }}</small>
                                         </div>
-                                        
+
                                     </div>
                                     <button type="submit" class="btn bg-gradient-dark">Submit</button>
                                 </form>

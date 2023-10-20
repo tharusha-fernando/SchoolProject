@@ -27,20 +27,20 @@
                                             <th>Code</th>
                                             <th>Name</th>
                                             <th>Description</th>
-                    
+
                                             <th>Actions</th>
-                                            
+
                                         </tr>
                                     </thead>
                                 </table>
                             </div>
 
                         </div>
-                      
+
                     </div>
                 </div>
             </div>
-         
+
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
@@ -55,7 +55,7 @@
                     '{{ route('courses.destroy', ['course' => '__courseId']) }}'
                     .replace('__courseId', courseId);
 
-                    var studentId = $(this).data('id');
+                var studentId = $(this).data('id');
                 var url =
                     '{{ route('courses.destroy', ['course' => '__courseId']) }}'
                     .replace('__courseId', courseId);
@@ -63,11 +63,11 @@
                 var confirmDelete = confirm("Are you sure you want to delete?");
 
                 if (confirmDelete) {
-                   
-                    deleteData(url, table,courseId);
+
+                    deleteData(url, table, courseId);
                 }
 
-             
+
             });
 
             var table = $('#coursesDataTable').DataTable({
@@ -75,7 +75,7 @@
                 'pageLength': 15,
                 'ajax': {
                     'url': "{{ route('courses.getData') }}",
-                   
+
                 },
                 'processing': true,
                 'serverSide': true,
@@ -124,7 +124,7 @@
                     [0, 'desc']
                 ],
                 'columnDefs': [
-                    
+
                     // {
                     //     "targets": 3,
                     //     "width": "60px",

@@ -22,8 +22,7 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Email address</label>
                                             <input type="email" name="email"
-                                                class="form-control border border-2 p-2"
-                                                value=''>
+                                                class="form-control border border-2 p-2" value=''>
                                             <small
                                                 class="text-danger error error_email">{{ $errors->first('email') }}</small>
 
@@ -32,8 +31,7 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Name</label>
                                             <input type="text" name="name"
-                                                class="form-control border border-2 p-2"
-                                                value=''>
+                                                class="form-control border border-2 p-2" value=''>
                                             <small
                                                 class="text-danger error error_name">{{ $errors->first('name') }}</small>
 
@@ -62,7 +60,7 @@
                                                 class="text-danger error error_gender">{{ $errors->first('gender') }}</small>
 
                                         </div> --}}
-{{-- 
+                                        {{-- 
                                         <div class="mb-3 col-md-12">
                                             <label for="floatingTextarea2">Address</label>
                                             <textarea class="form-control border border-2 p-2" placeholder=" Say something about yourself" id="floatingTextarea2"
@@ -72,7 +70,7 @@
 
                                         </div> --}}
 
-                                    
+
                                     </div>
                                     <button type="submit" class="btn bg-gradient-dark">Submit</button>
                                 </form>
@@ -108,7 +106,7 @@
             });
 
 
-           
+
 
         });
     </script>

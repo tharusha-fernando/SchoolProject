@@ -14,11 +14,11 @@
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
-            <li class="nav-item mt-3">
+            {{-- <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Laravel examples
                 </h6>
-            </li>
-            <li class="nav-item">
+            </li> --}}
+            {{-- <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-primary' : '' }} "
                     href="{{ route('user-profile') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -26,7 +26,7 @@
                     </div>
                     <span class="nav-link-text ms-1">User Profile</span>
                 </a>
-            </li>
+            </li> --}}
             {{-- <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'user-management' ? ' active bg-gradient-primary' : '' }} "
                     href="{{ route('user-management') }}">
@@ -48,7 +48,7 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            @if (auth()->user()->hasRole('administrator'))
+            @if (auth()->user()->hasRole('administrator') || auth()->user()->hasRole('superadministrator'))
                 <li class="nav-item">
                     <a class="nav-link text-white {{ $activePage == 'students' ? ' active bg-gradient-primary' : '' }} "
                         href="{{ route('students.index') }}">
@@ -67,15 +67,18 @@
                         <span class="nav-link-text ms-1">Tutors</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white {{ $activePage == 'admins' ? ' active bg-gradient-primary' : '' }} "
-                        href="{{ route('admins.index') }}">
-                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="material-icons opacity-10">dashboard</i>
-                        </div>
-                        <span class="nav-link-text ms-1">Admins</span>
-                    </a>
-                </li>
+                @if (auth()->user()->hasRole('superadministrator'))
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ $activePage == 'admins' ? ' active bg-gradient-primary' : '' }} "
+                            href="{{ route('admins.index') }}">
+                            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="material-icons opacity-10">dashboard</i>
+                            </div>
+                            <span class="nav-link-text ms-1">Admins</span>
+                        </a>
+                    </li>
+                @endif
+
                 <li class="nav-item">
                     <a class="nav-link text-white {{ $activePage == 'lectures' ? ' active bg-gradient-primary' : '' }} "
                         href="{{ route('lectures.index') }}">
@@ -98,6 +101,8 @@
 
             @if (auth()->user()->hasRole('tutor'))
             @endif
+
+
 
             @if (auth()->user()->hasRole('student'))
             @endif
@@ -190,9 +195,11 @@
         </div> --}}
         <div class="mx-3">
             <a class="btn bg-gradient-primary w-100"
-                href="https://www.creative-tim.com/product/material-dashboard-pro-laravel" target="_blank"
-                type="button">Upgrade
-                to pro</a>
+            href="{{ route('user-profile') }}" target="_blank"
+                type="button">
+                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i style="font-size: 1.2rem;" class="fas fa-user-circle ps-2 pe-2 text-center"></i>
+                </div>User Profile</a>
         </div>
     </div>
 </aside>

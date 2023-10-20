@@ -78,11 +78,11 @@
 
 
                         </div>
-                     
+
                     </div>
                 </div>
             </div>
-         
+
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
@@ -111,7 +111,7 @@
                 'pageLength': 15,
                 'ajax': {
                     'url': "{{ route('students.getData') }}",
-                    
+
                 },
                 'processing': true,
                 'serverSide': true,

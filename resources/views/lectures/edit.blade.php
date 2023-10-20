@@ -15,7 +15,8 @@
                         </div>
                         <div class="card-body px-0 pb-2 m-2">
                             <div class="px-0 pb-2 m-2">
-                                <form method='PUT' action='{{ route('lectures.update', ['lecture' => $lecture]) }}' id="lectureCreateForm">
+                                <form method='PUT' action='{{ route('lectures.update', ['lecture' => $lecture]) }}'
+                                    id="lectureCreateForm">
                                     @csrf
                                     <div class="row">
 
@@ -23,20 +24,24 @@
                                             <label class="form-label">Tutor</label>
                                             <select class="form-control border border-2 p-2" name="tutor_id">
                                                 @foreach ($tutors as $tutor)
-                                                    <option value="{{ $tutor->id }}" @if($tutor->id == $lecture->tutor_id) selected @endif>
+                                                    <option value="{{ $tutor->id }}"
+                                                        @if ($tutor->id == $lecture->tutor_id) selected @endif>
                                                         {{ $tutor->User->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <small class="text-danger error error_tutor_id">{{ $errors->first('tutor_id') }}</small>
+                                            <small
+                                                class="text-danger error error_tutor_id">{{ $errors->first('tutor_id') }}</small>
                                         </div>
-                                        
+
 
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Course</label>
                                             <select class="form-control border border-2 p-2" name="course_id">
-                                                @foreach ($courses as $course )
-                                                    <option value="{{$course->id}}" @if($course->id == $lecture->course_id) selected @endif>{{$course->course_name}}</option>
+                                                @foreach ($courses as $course)
+                                                    <option value="{{ $course->id }}"
+                                                        @if ($course->id == $lecture->course_id) selected @endif>
+                                                        {{ $course->course_name }}</option>
                                                 @endforeach
                                             </select>
                                             <small
@@ -47,8 +52,10 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Class Room</label>
                                             <select class="form-control border border-2 p-2" name="classroom_id">
-                                                @foreach ($classRooms as $classRoom )
-                                                    <option value="{{$classRoom->id}}" @if($classRoom->id == $lecture->classroom_id) selected @endif>{{$classRoom->name}}</option>
+                                                @foreach ($classRooms as $classRoom)
+                                                    <option value="{{ $classRoom->id }}"
+                                                        @if ($classRoom->id == $lecture->classroom_id) selected @endif>
+                                                        {{ $classRoom->name }}</option>
                                                 @endforeach
                                             </select>
                                             <small
@@ -61,9 +68,15 @@
                                             <div class="form-group">
                                                 <select class="form-control  border border-2 p-2" id="exampleGender"
                                                     name="time_slot">
-                                                    <option value="1" @if($lecture->start_time == '14:00:00') selected @endif >2PM - 4PM</option>
-                                                    <option value="2" @if($lecture->start_time == '16:00:00') selected @endif>4PM - 6PM</option>
-                                                    <option value="3" @if($lecture->start_time == '18:00:00') selected @endif>6PM - 8PM</option>
+                                                    <option value="1"
+                                                        @if ($lecture->start_time == '14:00:00') selected @endif>2PM - 4PM
+                                                    </option>
+                                                    <option value="2"
+                                                        @if ($lecture->start_time == '16:00:00') selected @endif>4PM - 6PM
+                                                    </option>
+                                                    <option value="3"
+                                                        @if ($lecture->start_time == '18:00:00') selected @endif>6PM - 8PM
+                                                    </option>
                                                 </select>
                                             </div>
 
@@ -74,9 +87,10 @@
 
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Date</label>
-                                            <input class="form-control border border-2 p-2" name="date" type="date" value="{{$lecture->date}}">
+                                            <input class="form-control border border-2 p-2" name="date"
+                                                type="date" value="{{ $lecture->date }}">
                                             {{-- <select >
-                                                @foreach ($tutors as $tutor )
+                                                @foreach ($tutors as $tutor)
                                                     <option value="{{$tutor->id}}">{{$tutor->User->name}}</option>
                                                 @endforeach
                                             </select> --}}

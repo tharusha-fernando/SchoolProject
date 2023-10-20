@@ -22,8 +22,9 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Tutor</label>
                                             <select class="form-control border border-2 p-2" name="tutor_id">
-                                                @foreach ($tutors as $tutor )
-                                                    <option value="{{$tutor->id}}">{{$tutor->User->name}}</option>
+                                                @foreach ($tutors as $tutor)
+                                                    <option value="{{ $tutor->id }}">{{ $tutor->User->name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             <small
@@ -34,8 +35,9 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Course</label>
                                             <select class="form-control border border-2 p-2" name="course_id">
-                                                @foreach ($courses as $course )
-                                                    <option value="{{$course->id}}">{{$course->course_name}}</option>
+                                                @foreach ($courses as $course)
+                                                    <option value="{{ $course->id }}">{{ $course->course_name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             <small
@@ -46,8 +48,8 @@
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Class Room</label>
                                             <select class="form-control border border-2 p-2" name="classroom_id">
-                                                @foreach ($classRooms as $classRoom )
-                                                    <option value="{{$classRoom->id}}">{{$classRoom->name}}</option>
+                                                @foreach ($classRooms as $classRoom)
+                                                    <option value="{{ $classRoom->id }}">{{ $classRoom->name }}</option>
                                                 @endforeach
                                             </select>
                                             <small
@@ -73,9 +75,10 @@
 
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Date</label>
-                                            <input class="form-control border border-2 p-2" name="date" type="date">
+                                            <input class="form-control border border-2 p-2" name="date"
+                                                type="date">
                                             {{-- <select >
-                                                @foreach ($tutors as $tutor )
+                                                @foreach ($tutors as $tutor)
                                                     <option value="{{$tutor->id}}">{{$tutor->User->name}}</option>
                                                 @endforeach
                                             </select> --}}

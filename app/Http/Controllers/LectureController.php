@@ -80,7 +80,7 @@ class LectureController extends Controller
         // dd($validatedData);
 
         Lecture::create($validatedData);
-        return response()->json(['message'=>"Student Created Successfully"],200);
+        return response()->json(['message'=>"Lecture Created Successfully"],200);
 
 
 
@@ -149,7 +149,7 @@ class LectureController extends Controller
         // dd($validatedData);
 
         $lecture->update($validatedData);
-        return response()->json(['message'=>"Student Updated Successfully"],200);
+        return response()->json(['message'=>"Lecture Updated Successfully"],200);
 
         //
     }
@@ -182,13 +182,13 @@ class LectureController extends Controller
                 ->addColumn('tutor', function ($lecture) {
                     return $lecture->Tutor->User->name;
                 })
-                ->addColumn('date', function ($lecture) {
+                ->editColumn('date', function ($lecture) {
                     return $lecture->date;
                 })
-                ->addColumn('start', function ($lecture) {
+                ->editColumn('start_time', function ($lecture) {
                     return $lecture->start_time;
                 })
-                ->addColumn('end', function ($lecture) {
+                ->editColumn('end_time', function ($lecture) {
                     return $lecture->end_time;
                 })
                 ->addColumn('actions', function ($lecture) {
@@ -209,8 +209,9 @@ class LectureController extends Controller
                 
                     return $htmlContent;
                 })
-                
-                ->rawColumns(['course', 'class_room','tutor','date','start','end','actions'])
+                // ->rawColumns(['course', 'class_room','tutor','date','start','end','actions'])
+
+                ->rawColumns(['course', 'class_room','tutor','date','start_time','end_time','actions'])
                 ->make(true);
         } catch (Throwable $th) {
             dd($th->getMessage());

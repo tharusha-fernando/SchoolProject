@@ -13,7 +13,27 @@ class ClassRoomSeeder extends Seeder
      */
     public function run(): void
     {
-        ClassRoom::factory(10)->create(); // Adjust the number as needed
+        $classNames = [
+            'Class 1',
+            'Class 2',
+            'Class 3',
+            'Class 4',
+            'Class 5',
+            'Class 6',
+            'Class 7',
+            'Class 8',
+            'Class 9',
+            'Class 10',
+        ];
+
+        
+foreach ($classNames as $className) {
+    // echo "Class Name: $className<br>";
+    ClassRoom::factory()->create(['name'=>$className]); // Adjust the number as needed
+
+}
+        
+        // ClassRoom::factory(10)->create(); // Adjust the number as needed
 
         //
     }

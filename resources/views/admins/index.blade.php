@@ -29,19 +29,19 @@
                                             {{-- <th>Gender</th> --}}
                                             {{-- <th>Address</th>
                                             <th>Telephone</th> --}}
-                                             <th>Actions</th>
-                                            
+                                            <th>Actions</th>
+
                                         </tr>
                                     </thead>
                                 </table>
                             </div>
 
                         </div>
-                      
+
                     </div>
                 </div>
             </div>
-         
+
             <x-footers.auth></x-footers.auth>
         </div>
     </main>
@@ -56,7 +56,7 @@
                     '{{ route('admins.destroy', ['admin' => '__adminId']) }}'
                     .replace('__adminId', adminId);
 
-                    var studentId = $(this).data('id');
+                var studentId = $(this).data('id');
                 var url =
                     '{{ route('admins.destroy', ['admin' => '__adminId']) }}'
                     .replace('__adminId', adminId);
@@ -64,11 +64,11 @@
                 var confirmDelete = confirm("Are you sure you want to delete?");
 
                 if (confirmDelete) {
-                   
-                    deleteData(url, table,adminId);
+
+                    deleteData(url, table, adminId);
                 }
 
-             
+
             });
 
             var table = $('#adminsDataTable').DataTable({
@@ -76,7 +76,7 @@
                 'pageLength': 15,
                 'ajax': {
                     'url': "{{ route('admins.getData') }}",
-                   
+
                 },
                 'processing': true,
                 'serverSide': true,
@@ -131,7 +131,7 @@
                     [0, 'desc']
                 ],
                 'columnDefs': [
-                    
+
                     // {
                     //     "targets": 3,
                     //     "width": "100px",

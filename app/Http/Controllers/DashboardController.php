@@ -13,14 +13,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        if (auth()->user()->hasRole('superadministrator')) {
+        if (auth()->user()->hasRole('superadminisasastrator')) {
             $studentCount = Student::count();
             $tutorCount = Tutors::count();
             $courseCount=Course::count();
             $lectureCount=Lecture::count();
             $todaysLectures=Lecture::where('date',Carbon::now()->tz('Asia/Colombo')->format('Y:m:d'))->orderBy('start_time','desc');
             return view('dashboard.index', compact('studentCount', 'tutorCount','courseCount','lectureCount','todaysLectures'));
-        } elseif (auth()->user()->hasRole('administrator')) {
+        } elseif (auth()->user()->hasRole('administrator') || auth()->user()->hasRole('superadministrator' )) {
             $studentCount = Student::count();
             $tutorCount = Tutors::count();
             $courseCount=Course::count();

@@ -119,14 +119,14 @@
 
                     },
                     {
-                        data: 'start',
-                        name: 'start',
+                        data: 'start_time',
+                        name: 'start_time',
                         'className': 'text-start',
 
                     },
                     {
-                        data: 'end',
-                        name: 'end',
+                        data: 'end_time',
+                        name: 'end_time',
                         'className': 'text-start',
 
                     },
