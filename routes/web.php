@@ -94,6 +94,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::resource('lectures',LectureController::class);
 		Route::get('/lectures-get-data',[LectureController::class,'getData'])->name('lectures.getData');
+		Route::get('/lectures-get-timetable',[LectureController::class,'getTimetable'])->name('lectures.getTimetable');
+
 	});
 	
 

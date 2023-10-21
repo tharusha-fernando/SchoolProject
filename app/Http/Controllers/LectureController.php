@@ -32,10 +32,10 @@ class LectureController extends Controller
      */
     public function create()
     {
-        $courses=Course::all();
-        $classRooms=ClassRoom::all();
-        $tutors=Tutors::with('User')->get();
-        return view('lectures.create',compact('courses','classRooms','tutors'));
+        $courses = Course::all();
+        $classRooms = ClassRoom::all();
+        $tutors = Tutors::with('User')->get();
+        return view('lectures.create', compact('courses', 'classRooms', 'tutors'));
 
         //
     }
@@ -45,34 +45,33 @@ class LectureController extends Controller
      */
     public function store(StoreLectureRequest $request)
     {
-        $validatedData=$request->validated();
-        
+        $validatedData = $request->validated();
 
-        if($validatedData['time_slot']==1){
-            $validatedData['start_time']=Carbon::parse('14:00:00')->format('H:i:s');
-            $validatedData['end_time']=Carbon::parse('16:00:00')->format('H:i:s');
 
-        }elseif($validatedData['time_slot']==2){
-            $validatedData['start_time']=Carbon::parse('16:00:00')->format('H:i:s');
-            $validatedData['end_time']=Carbon::parse('18:00:00')->format('H:i:s');
-        }elseif($validatedData['time_slot']==3){
-            $validatedData['start_time']=Carbon::parse('18:00:00')->format('H:i:s');
-            $validatedData['end_time']=Carbon::parse('20:00:00')->format('H:i:s');
+        if ($validatedData['time_slot'] == 1) {
+            $validatedData['start_time'] = Carbon::parse('14:00:00')->format('H:i:s');
+            $validatedData['end_time'] = Carbon::parse('16:00:00')->format('H:i:s');
+        } elseif ($validatedData['time_slot'] == 2) {
+            $validatedData['start_time'] = Carbon::parse('16:00:00')->format('H:i:s');
+            $validatedData['end_time'] = Carbon::parse('18:00:00')->format('H:i:s');
+        } elseif ($validatedData['time_slot'] == 3) {
+            $validatedData['start_time'] = Carbon::parse('18:00:00')->format('H:i:s');
+            $validatedData['end_time'] = Carbon::parse('20:00:00')->format('H:i:s');
         }
 
-        $isTaken=Lecture::where('date',$validatedData['date'])
-        ->where('start_time',$validatedData['start_time'])
-        ->where('classroom_id',$validatedData['classroom_id'])
-        ->exists();
+        $isTaken = Lecture::where('date', $validatedData['date'])
+            ->where('start_time', $validatedData['start_time'])
+            ->where('classroom_id', $validatedData['classroom_id'])
+            ->exists();
 
         // dd($isTaken);
-        if($isTaken){
+        if ($isTaken) {
             return response()->json([
                 'message' => 'Time Slot Already Taken',
                 'errors' => [
                     'classroom_id' => ['The selected time slot is already taken.'],
                     'time_slot' => ['The selected time slot is already taken.']
-                    
+
                 ]
             ], 422);
             // return response()->json(['message'=>"Time Slot Already Taken"],500);
@@ -80,7 +79,7 @@ class LectureController extends Controller
         // dd($validatedData);
 
         Lecture::create($validatedData);
-        return response()->json(['message'=>"Lecture Created Successfully"],200);
+        return response()->json(['message' => "Lecture Created Successfully"], 200);
 
 
 
@@ -100,10 +99,10 @@ class LectureController extends Controller
      */
     public function edit(Lecture $lecture)
     {
-        $courses=Course::all();
-        $classRooms=ClassRoom::all();
-        $tutors=Tutors::with('User')->get();
-        return view('lectures.edit',compact('lecture','courses','classRooms','tutors'));
+        $courses = Course::all();
+        $classRooms = ClassRoom::all();
+        $tutors = Tutors::with('User')->get();
+        return view('lectures.edit', compact('lecture', 'courses', 'classRooms', 'tutors'));
 
         //
     }
@@ -113,35 +112,34 @@ class LectureController extends Controller
      */
     public function update(UpdateLectureRequest $request, Lecture $lecture)
     {
-        $validatedData=$request->validated();
-        
+        $validatedData = $request->validated();
 
-        if($validatedData['time_slot']==1){
-            $validatedData['start_time']=Carbon::parse('14:00:00')->format('H:i:s');
-            $validatedData['end_time']=Carbon::parse('16:00:00')->format('H:i:s');
 
-        }elseif($validatedData['time_slot']==2){
-            $validatedData['start_time']=Carbon::parse('16:00:00')->format('H:i:s');
-            $validatedData['end_time']=Carbon::parse('18:00:00')->format('H:i:s');
-        }elseif($validatedData['time_slot']==3){
-            $validatedData['start_time']=Carbon::parse('18:00:00')->format('H:i:s');
-            $validatedData['end_time']=Carbon::parse('20:00:00')->format('H:i:s');
+        if ($validatedData['time_slot'] == 1) {
+            $validatedData['start_time'] = Carbon::parse('14:00:00')->format('H:i:s');
+            $validatedData['end_time'] = Carbon::parse('16:00:00')->format('H:i:s');
+        } elseif ($validatedData['time_slot'] == 2) {
+            $validatedData['start_time'] = Carbon::parse('16:00:00')->format('H:i:s');
+            $validatedData['end_time'] = Carbon::parse('18:00:00')->format('H:i:s');
+        } elseif ($validatedData['time_slot'] == 3) {
+            $validatedData['start_time'] = Carbon::parse('18:00:00')->format('H:i:s');
+            $validatedData['end_time'] = Carbon::parse('20:00:00')->format('H:i:s');
         }
 
-        $isTaken=Lecture::where('date',$validatedData['date'])
-        ->where('start_time',$validatedData['start_time'])
-        ->where('classroom_id',$validatedData['classroom_id'])
-        ->whereNot('id',$lecture->id)
-        ->exists();
+        $isTaken = Lecture::where('date', $validatedData['date'])
+            ->where('start_time', $validatedData['start_time'])
+            ->where('classroom_id', $validatedData['classroom_id'])
+            ->whereNot('id', $lecture->id)
+            ->exists();
 
         // dd($isTaken);
-        if($isTaken){
+        if ($isTaken) {
             return response()->json([
                 'message' => 'Time Slot Already Taken',
                 'errors' => [
                     'classroom_id' => ['The selected time slot is already taken.'],
                     'time_slot' => ['The selected time slot is already taken.']
-                    
+
                 ]
             ], 422);
             // return response()->json(['message'=>"Time Slot Already Taken"],500);
@@ -149,7 +147,7 @@ class LectureController extends Controller
         // dd($validatedData);
 
         $lecture->update($validatedData);
-        return response()->json(['message'=>"Lecture Updated Successfully"],200);
+        return response()->json(['message' => "Lecture Updated Successfully"], 200);
 
         //
     }
@@ -160,7 +158,7 @@ class LectureController extends Controller
     public function destroy(Lecture $lecture)
     {
         $lecture->delete();
-        return response()->json(['message'=>"Lecture Deleted Successfully"],200);
+        return response()->json(['message' => "Lecture Deleted Successfully"], 200);
 
         //
     }
@@ -169,8 +167,8 @@ class LectureController extends Controller
     {
         try {
             $lectures = Lecture::query()
-                ->with('Course','ClassRoom','Tutor.User')
-            //    ->where('')
+                ->with('Course', 'ClassRoom', 'Tutor.User')
+                //    ->where('')
                 ->orderBy('created_at', 'desc');
 
             return DataTables::of($lectures)
@@ -193,7 +191,7 @@ class LectureController extends Controller
                 })
                 ->addColumn('actions', function ($lecture) {
                     $route = route('lectures.edit', ['lecture' => $lecture]);
-                
+
                     $htmlContent = '
                         <a rel="tooltip" class="btn btn-success btn-link" href="' . $route . '" data-original-title="" title="">
                             <i class="material-icons">edit</i>
@@ -206,15 +204,124 @@ class LectureController extends Controller
                         </button>
                         
                     ';
-                
+
                     return $htmlContent;
                 })
                 // ->rawColumns(['course', 'class_room','tutor','date','start','end','actions'])
 
-                ->rawColumns(['course', 'class_room','tutor','date','start_time','end_time','actions'])
+                ->rawColumns(['course', 'class_room', 'tutor', 'date', 'start_time', 'end_time', 'actions'])
                 ->make(true);
         } catch (Throwable $th) {
             dd($th->getMessage());
+        }
+    }
+
+    public function getTimetable()
+    {
+        $today = Carbon::today();
+
+        // Check if today is a Monday
+        if ($today->dayOfWeek === Carbon::MONDAY) {
+            // If today is Monday, return today's date
+            $closestPastMonday = $today;
+        } else {
+            // Find the date of the closest past Monday
+            $closestPastMonday = $today->previous(Carbon::MONDAY)->format('Y:m:d');
+        }
+
+        // Check if today is a Monday
+        if ($today->dayOfWeek === Carbon::SUNDAY) {
+            // If today is Monday, return today's date
+            $closestNextSunday = $today;
+        } else {
+            // Find the date of the closest past Monday
+            $closestNextSunday = $today->next(Carbon::SUNDAY)->format('Y:m:d');
+        }
+
+        // dd($closestNextSunday);
+        $lecturesThisWeek = Lecture::whereBetween('date', [$closestPastMonday, $closestNextSunday])->get();
+        // dd($lecturesThisWeek);
+        // $records = YourModel::whereBetween('date_column', [$startDate, $endDate])->get();
+        $lecturesMonday = ["m"];
+        $lecturesTuesday = ["t"];
+        $lecturesWednesday = ["w"];
+        $lecturesThursday = ["t"];
+        $lecturesFriday = ["f"];
+        $lecturesSaturday = ["sa"];
+        $lecturesSunday = ["su"];
+
+        foreach ($lecturesThisWeek as $lectureThisWeek) {
+            $dateToCheck = Carbon::parse($lectureThisWeek->date); // Replace with your date
+
+            if ($dateToCheck->isMonday()) {
+                // It's Monday
+                echo "It's a Monday.";
+                $lecturesMonday[] = $lectureThisWeek;
+            } elseif ($dateToCheck->isTuesday()) {
+                // It's Tuesday
+                echo "It's a Tuesday.";
+                $lecturesTuesday[] = $lectureThisWeek;
+            } elseif ($dateToCheck->isWednesday()) {
+                // It's Wednesday
+                echo "It's a Wednesday.";
+                $lecturesWednesday[] = $lectureThisWeek;
+            } elseif ($dateToCheck->isThursday()) {
+                // It's Thursday
+                echo "It's a Thursday.";
+                $lecturesThursday[] = $lectureThisWeek;
+            } elseif ($dateToCheck->isFriday()) {
+                // It's Friday
+                echo "It's a Friday.";
+                $lecturesFriday[] = $lectureThisWeek;
+            } elseif ($dateToCheck->isSaturday()) {
+                // It's Saturday
+                echo "It's a Saturday.";
+                $lecturesSaturday[] = $lectureThisWeek;
+            } elseif ($dateToCheck->isSunday()) {
+                // It's Sunday
+                echo "It's a Sunday.";
+                $lecturesSunday[] = $lectureThisWeek;
+            } else {
+                // It's not a valid day of the week
+                echo "Invalid day of the week.";
+            }
+        }
+        dd(
+            $lecturesMonday,
+            $lecturesTuesday,
+            $lecturesWednesday,
+            $lecturesThursday,
+            $lecturesFriday,
+            $lecturesSaturday,
+            $lecturesSunday,
+        );
+
+        $collectionTime=[];
+        $count = 0;
+        while (true) {
+            $lec = (object)[
+                'Monday'=>$lecturesMonday[$count],
+                'Tuesday'=>$lecturesTuesday[$count],
+                'Wednesday'=>$lecturesWednesday[$count],
+                'Thursday'=>$lecturesThursday[$count],
+                'Friday'=>$lecturesFriday[$count],
+                'Saturday'=>$lecturesSaturday[$count],
+                'Sunday'=>$lecturesSunday[$count],
+            ];
+            $collectionTime[]=$lec;
+
+            unset($lecturesMonday[$count]);
+            unset($lecturesTuesday[$count]);
+            unset ($lecturesWednesday[$count]);
+            unset ($lecturesThursday[$count]);
+            unset ($lecturesFriday[$count]);
+            unset ($lecturesSaturday[$count]);
+            unset ($lecturesSunday[$count]);
+
+            if (empty($lecturesMonday) && empty($lecturesTuesday) && empty($lecturesWednesday) && empty($lecturesThursday) && empty($lecturesFriday) && empty($lecturesSaturday) && empty($lecturesSunday)) {
+                // $breakLoop = true;
+                break;
+            }
         }
     }
 }
