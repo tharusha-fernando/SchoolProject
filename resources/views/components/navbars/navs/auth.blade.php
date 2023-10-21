@@ -40,11 +40,11 @@
                 </li>
                 {{-- <li class="nav-item px-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0">
-                        <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                        <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>dfdfdf
                     </a>
                 </li> --}}
                 {{-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
+                    <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"dfdfdf
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bell cursor-pointer"></i>
                     </a>
