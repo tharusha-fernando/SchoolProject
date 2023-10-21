@@ -40,7 +40,7 @@
 
                                         <div class="mb-3 col-md-6">
                                             <label class="form-label">Phone</label>
-                                            <input type="number" name="tp"
+                                            <input type="tel" name="tp"
                                                 class="form-control border border-2 p-2"
                                                 value='{{ $tutor->Tutor->tp }}'>
                                             <small class="text-danger error error_tp">{{ $errors->first('tp') }}</small>

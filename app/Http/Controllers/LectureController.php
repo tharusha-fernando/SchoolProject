@@ -216,7 +216,7 @@ class LectureController extends Controller
         }
     }
 
-    public function getTimetable()
+    public static function getTimetable()
     {
         $today = Carbon::today();
 
@@ -239,89 +239,132 @@ class LectureController extends Controller
         }
 
         // dd($closestNextSunday);
-        $lecturesThisWeek = Lecture::whereBetween('date', [$closestPastMonday, $closestNextSunday])->get();
+        $lecturesThisWeek = Lecture::with('Course','ClassRoom','Tutor.User')->whereBetween('date', [$closestPastMonday, $closestNextSunday])->orderBy('start_time')->get();
         // dd($lecturesThisWeek);
         // $records = YourModel::whereBetween('date_column', [$startDate, $endDate])->get();
-        $lecturesMonday = ["m"];
-        $lecturesTuesday = ["t"];
-        $lecturesWednesday = ["w"];
-        $lecturesThursday = ["t"];
-        $lecturesFriday = ["f"];
-        $lecturesSaturday = ["sa"];
-        $lecturesSunday = ["su"];
+        $lecturesMonday = [];
+        $lecturesTuesday = [];
+        $lecturesWednesday = [];
+        $lecturesThursday = [];
+        $lecturesFriday = [];
+        $lecturesSaturday = [];
+        $lecturesSunday = [];
 
         foreach ($lecturesThisWeek as $lectureThisWeek) {
             $dateToCheck = Carbon::parse($lectureThisWeek->date); // Replace with your date
 
             if ($dateToCheck->isMonday()) {
                 // It's Monday
-                echo "It's a Monday.";
+                // echo "It's a Monday.";
                 $lecturesMonday[] = $lectureThisWeek;
             } elseif ($dateToCheck->isTuesday()) {
                 // It's Tuesday
-                echo "It's a Tuesday.";
+                // echo "It's a Tuesday.";
                 $lecturesTuesday[] = $lectureThisWeek;
             } elseif ($dateToCheck->isWednesday()) {
                 // It's Wednesday
-                echo "It's a Wednesday.";
+                // echo "It's a Wednesday.";
                 $lecturesWednesday[] = $lectureThisWeek;
             } elseif ($dateToCheck->isThursday()) {
                 // It's Thursday
-                echo "It's a Thursday.";
+                // echo "It's a Thursday.";
                 $lecturesThursday[] = $lectureThisWeek;
             } elseif ($dateToCheck->isFriday()) {
                 // It's Friday
-                echo "It's a Friday.";
+                // echo "It's a Friday.";
                 $lecturesFriday[] = $lectureThisWeek;
             } elseif ($dateToCheck->isSaturday()) {
                 // It's Saturday
-                echo "It's a Saturday.";
+                // echo "It's a Saturday.";
                 $lecturesSaturday[] = $lectureThisWeek;
             } elseif ($dateToCheck->isSunday()) {
                 // It's Sunday
-                echo "It's a Sunday.";
+                // echo "It's a Sunday.";
                 $lecturesSunday[] = $lectureThisWeek;
             } else {
                 // It's not a valid day of the week
-                echo "Invalid day of the week.";
+                // echo "Invalid day of the week.";
             }
         }
-        dd(
-            $lecturesMonday,
-            $lecturesTuesday,
-            $lecturesWednesday,
-            $lecturesThursday,
-            $lecturesFriday,
-            $lecturesSaturday,
-            $lecturesSunday,
-        );
+        // dd(
+        //     $lecturesMonday,
+        //     $lecturesTuesday,
+        //     $lecturesWednesday,
+        //     $lecturesThursday,
+        //     $lecturesFriday,
+        //     $lecturesSaturday,
+        //     $lecturesSunday,
+        // );
 
         $collectionTime=[];
         $count = 0;
+        // dd("asasasasas");
         while (true) {
-            $lec = (object)[
-                'Monday'=>$lecturesMonday[$count],
-                'Tuesday'=>$lecturesTuesday[$count],
-                'Wednesday'=>$lecturesWednesday[$count],
-                'Thursday'=>$lecturesThursday[$count],
-                'Friday'=>$lecturesFriday[$count],
-                'Saturday'=>$lecturesSaturday[$count],
-                'Sunday'=>$lecturesSunday[$count],
+            // $lec = (object)[
+            //     'Monday'=>$lecturesMonday[$count] ? $lecturesMonday[$count] :"",
+            //     'Tuesday'=>$lecturesTuesday[$count] ? $lecturesTuesday[$count] : "",
+            //     'Wednesday'=>$lecturesWednesday[$count] ? $lecturesWednesday[$count] : "",
+            //     'Thursday'=>$lecturesThursday[$count] ? $lecturesThursday[$count] : "",
+            //     'Friday'=>$lecturesFriday[$count] ? $lecturesFriday[$count] : "",
+            //     'Saturday'=>$lecturesSaturday[$count] ? $lecturesSaturday[$count] : "",
+            //     'Sunday'=>$lecturesSunday[$count] ? $lecturesSunday[$count] : "",
+            // ];
+            $lec = (object) [
+                'Monday'    => isset($lecturesMonday[$count]) ? $lecturesMonday[$count] : "",
+                'Tuesday'   => isset($lecturesTuesday[$count]) ? $lecturesTuesday[$count] : "",
+                'Wednesday' => isset($lecturesWednesday[$count]) ? $lecturesWednesday[$count] : "",
+                'Thursday'  => isset($lecturesThursday[$count]) ? $lecturesThursday[$count] : "",
+                'Friday'    => isset($lecturesFriday[$count]) ? $lecturesFriday[$count] : "",
+                'Saturday'  => isset($lecturesSaturday[$count]) ? $lecturesSaturday[$count] : "",
+                'Sunday'    => isset($lecturesSunday[$count]) ? $lecturesSunday[$count] : "",
             ];
+            
             $collectionTime[]=$lec;
+            // dd($collectionTime);
 
-            unset($lecturesMonday[$count]);
-            unset($lecturesTuesday[$count]);
-            unset ($lecturesWednesday[$count]);
-            unset ($lecturesThursday[$count]);
-            unset ($lecturesFriday[$count]);
-            unset ($lecturesSaturday[$count]);
-            unset ($lecturesSunday[$count]);
+            // unset($lecturesMonday[$count]);
+            // unset($lecturesTuesday[$count]);
+            // unset ($lecturesWednesday[$count]);
+            // unset ($lecturesThursday[$count]);
+            // unset ($lecturesFriday[$count]);
+            // unset ($lecturesSaturday[$count]);
+            // unset ($lecturesSunday[$count]);
 
+            if (isset($lecturesMonday[$count])) {
+                unset($lecturesMonday[$count]);
+            }
+            if (isset($lecturesTuesday[$count])) {
+                unset($lecturesTuesday[$count]);
+            }
+            if (isset($lecturesWednesday[$count])) {
+                unset($lecturesWednesday[$count]);
+            }
+            if (isset($lecturesThursday[$count])) {
+                unset($lecturesThursday[$count]);
+            }
+            if (isset($lecturesFriday[$count])) {
+                unset($lecturesFriday[$count]);
+            }
+            if (isset($lecturesSaturday[$count])) {
+                unset($lecturesSaturday[$count]);
+            }
+            if (isset($lecturesSunday[$count])) {
+                unset($lecturesSunday[$count]);
+            }
+            
+            // dd($lecturesSaturday);
+$breakLoop=false;
             if (empty($lecturesMonday) && empty($lecturesTuesday) && empty($lecturesWednesday) && empty($lecturesThursday) && empty($lecturesFriday) && empty($lecturesSaturday) && empty($lecturesSunday)) {
-                // $breakLoop = true;
+                $breakLoop = true;
+                // break;
+            }
+            if($breakLoop){
                 break;
             }
+            $count++;
         }
+    //   dd($collectionTime);
+    return collect($collectionTime);
+
     }
 }

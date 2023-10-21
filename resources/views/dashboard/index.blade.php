@@ -213,79 +213,172 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($todaysLectures as $todaysLecture)
+                                        @foreach ($lectureTimetable as $lecs)
                                             <tr>
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
-                                                        {{-- <div>
-                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
-                                                                class="avatar avatar-sm me-3" alt="xd">
-                                                        </div> --}}
-                                                        <div>
-                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-slack.svg"
-                                                                class="avatar avatar-sm me-3" alt="team7">
-                                                        </div>
+
                                                         <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">
-                                                                {{ $todaysLecture->Course->course_name }}</h6>
+                                                            @if (isset($lecs->Monday) && is_object($lecs->Monday) && isset($lecs->Monday->course))
+                                                                <h6 class="mb-0 text-sm">
+                                                                    <a href="{{route('lectures.edit', ['lecture' => $lecs->Monday->id])}}"> {{ $lecs->Monday->course->course_name }}</a></h6>
+                                                                <h6 class="mb-0 text-sm"> By
+                                                                    {{ $lecs->Monday->Tutor->User->name }}</h6>
+                                                                <h6 class="mb-0 text-sm"> In
+                                                                    {{ $lecs->Monday->ClassRoom->name }}
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    {{ $lecs->Monday->start_time }} -
+                                                                    {{ $lecs->Monday->end_time }}
+                                                                    {{-- to --}}
+                                                                </h6>
+                                                            @else
+                                                                <h6 class="mb-0 text-sm">No lecture</h6>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </td>
 
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
-                                                        {{-- <div>
-                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
-                                                                class="avatar avatar-sm me-3" alt="xd">
-                                                        </div> --}}
+
                                                         <div class="d-flex flex-column justify-content-center">
+                                                            @if (isset($lecs->Tuesday) && is_object($lecs->Tuesday) && isset($lecs->Tuesday->course))
                                                             <h6 class="mb-0 text-sm">
-                                                                {{ $todaysLecture->ClassRoom->name }}</h6>
+                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Tuesday->id])}}">  {{ $lecs->Tuesday->course->course_name }}</a></h6>
+                                                            <h6 class="mb-0 text-sm"> By
+                                                                {{ $lecs->Tuesday->Tutor->User->name }}</h6>
+                                                            <h6 class="mb-0 text-sm"> In
+                                                                {{ $lecs->Tuesday->ClassRoom->name }}
+                                                            </h6>
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $lecs->Tuesday->start_time }} -
+                                                                {{ $lecs->Tuesday->end_time }}
+                                                                {{-- to --}}
+                                                            </h6>
+                                                            @else
+                                                                <h6 class="mb-0 text-sm">No lecture</h6>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
-                                                        {{-- <div>
-                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
-                                                                class="avatar avatar-sm me-3" alt="xd">
-                                                        </div> --}}
-                                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle"
-                                                            data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                                            title="Ryan Tompson">
-                                                            <img src="{{ asset('assets') }}/img/team-1.jpg"
-                                                                alt="team1">
-                                                        </a>
+
                                                         <div class="d-flex flex-column justify-content-center">
+                                                            @if (isset($lecs->Wednesday) && is_object($lecs->Wednesday) && isset($lecs->Wednesday->course))
                                                             <h6 class="mb-0 text-sm">
-                                                                {{ $todaysLecture->Tutor->User->name }}</h6>
+                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Wednesday->id])}}">  {{ $lecs->Wednesday->course->course_name }}</a></h6>
+                                                            <h6 class="mb-0 text-sm"> By
+                                                                {{ $lecs->Wednesday->Tutor->User->name }}</h6>
+                                                            <h6 class="mb-0 text-sm"> In
+                                                                {{ $lecs->Wednesday->ClassRoom->name }}
+                                                            </h6>
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $lecs->Wednesday->start_time }} -
+                                                                {{ $lecs->Wednesday->end_time }}
+                                                                {{-- to --}}
+                                                            </h6>
+                                                            @else
+                                                                <h6 class="mb-0 text-sm">No lecture</h6>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
-                                                        {{-- <div>
-                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
-                                                                class="avatar avatar-sm me-3" alt="xd">
-                                                        </div> --}}
+
                                                         <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">{{ $todaysLecture->date }}</h6>
+                                                            @if (isset($lecs->Thursday) && is_object($lecs->Thursday) && isset($lecs->Thursday->course))
+                                                            <h6 class="mb-0 text-sm">
+                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Thursday->id])}}"> {{ $lecs->Thursday->course->course_name }}</a></h6>
+                                                            <h6 class="mb-0 text-sm"> By
+                                                                {{ $lecs->Thursday->Tutor->User->name }}</h6>
+                                                            <h6 class="mb-0 text-sm"> In
+                                                                {{ $lecs->Thursday->ClassRoom->name }}
+                                                            </h6>
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $lecs->Thursday->start_time }} -
+                                                                {{ $lecs->Thursday->end_time }}
+                                                                {{-- to --}}
+                                                            </h6>
+                                                            @else
+                                                                <h6 class="mb-0 text-sm">No lecture</h6>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            @if (isset($lecs->Friday) && is_object($lecs->Friday) && isset($lecs->Friday->course))
+                                                            <h6 class="mb-0 text-sm">
+                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Friday->id])}}"> {{ $lecs->Friday->course->course_name }}</a></h6>
+                                                            <h6 class="mb-0 text-sm"> By
+                                                                {{ $lecs->Friday->Tutor->User->name }}</h6>
+                                                            <h6 class="mb-0 text-sm"> In
+                                                                {{ $lecs->Friday->ClassRoom->name }}
+                                                            </h6>
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $lecs->Friday->start_time }} -
+                                                                {{ $lecs->Friday->end_time }}
+                                                                {{-- to --}}
+                                                            </h6>
+                                                            @else
+                                                                <h6 class="mb-0 text-sm">No lecture on Friday</h6>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            @if (isset($lecs->Saturday) && is_object($lecs->Saturday) && isset($lecs->Saturday->course))
+                                                            <h6 class="mb-0 text-sm">
+                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Saturday->id])}}">  {{ $lecs->Saturday->course->course_name }}</a></h6>
+                                                            <h6 class="mb-0 text-sm"> By
+                                                                {{ $lecs->Saturday->Tutor->User->name }}</h6>
+                                                            <h6 class="mb-0 text-sm"> In
+                                                                {{ $lecs->Saturday->ClassRoom->name }}
+                                                            </h6>
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $lecs->Saturday->start_time }} -
+                                                                {{ $lecs->Saturday->end_time }}
+                                                                {{-- to --}}
+                                                            </h6>
+                                                            @else
+                                                                <h6 class="mb-0 text-sm">No lecture</h6>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            @if (isset($lecs->Sunday) && is_object($lecs->Sunday) && isset($lecs->Sunday->course))
+                                                            <h6 class="mb-0 text-sm">
+                                                               <a href="{{route('lectures.edit', ['lecture' => $lecs->Sunday->id])}}"> {{ $lecs->Sunday->course->course_name }}</a></h6>
+                                                            <h6 class="mb-0 text-sm"> By
+                                                                {{ $lecs->Sunday->Tutor->User->name }}</h6>
+                                                            <h6 class="mb-0 text-sm"> In
+                                                                {{ $lecs->Sunday->ClassRoom->name }}
+                                                            </h6>
+                                                            <h6 class="mb-0 text-sm">
+                                                                {{ $lecs->Sunday->start_time }} -
+                                                                {{ $lecs->Sunday->end_time }}
+                                                                {{-- to --}}
+                                                            </h6>
+                                                            @else
+                                                                <h6 class="mb-0 text-sm">No lecture</h6>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </td>
 
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        {{-- <div>
-                                                            <img src="{{ asset('assets') }}/img/small-logos/logo-xd.svg"
-                                                                class="avatar avatar-sm me-3" alt="xd">
-                                                        </div> --}}
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            <h6 class="mb-0 text-sm">{{ $todaysLecture->start_time }}
-                                                                - {{ $todaysLecture->end_time }}</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
+
 
                                                 {{-- <td class="align-middle text-center text-sm">
                                                     <span class="text-xs font-weight-bold"> $14,000 </span>
