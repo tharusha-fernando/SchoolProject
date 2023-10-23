@@ -24,6 +24,7 @@ use App\Http\Controllers\LectureController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\Student\MyCourses;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TutorsController;
 
@@ -100,7 +101,10 @@ Route::group(['middleware' => 'auth'], function () {
 	
 
 	Route::group(['prefix' => 'student', 'middleware' => ['role:student']], function() {
-	
+		Route::resource('my-courses',MyCourses::class);
+		Route::get('/mycourses/get-data',[MyCourses::class,'getData'])->name('my-courses.getData');
+		
+
 	});
 
 	Route::group(['prefix' => 'tutor', 'middleware' => ['role:tutor']], function() {

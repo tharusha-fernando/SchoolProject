@@ -55,9 +55,21 @@ class DashboardController extends Controller
 // dd($todaysLectures);
             return view('dashboard.index', compact('studentCount', 'tutorCount','courseCount','lectureCount','todaysLectures','lectureTimetable'));
         } elseif (auth()->user()->hasRole('student')) {
-            return view('student_side.dashboard.index');
+            $studentCount = Student::count();
+            $tutorCount = Tutors::count();
+            $courseCount=Course::count();
+            $lectureCount=Lecture::whereBetween('date', [$closestPastMonday, $closestNextSunday])->count();
+            $lectureTimetable=LectureController::getTimetable();
+            return view('student_side.dashboard.index',compact('studentCount', 'tutorCount','courseCount','lectureCount','lectureTimetable'));
         } elseif (auth()->user()->hasRole('tutor')) {
-            return view('tutor_side.dashboard.index');
+            $studentCount = Student::count();
+            $tutorCount = Tutors::count();
+            $courseCount=Course::count();
+            $lectureCount=Lecture::whereBetween('date', [$closestPastMonday, $closestNextSunday])->count();
+            $lectureTimetable=LectureController::getTimetable();
+            return view('tutor_side.dashboard.index',compact('studentCount', 'tutorCount','courseCount','lectureCount','lectureTimetable'));
+       
+            // return view('tutor_side.dashboard.index');
         }
     }
 }

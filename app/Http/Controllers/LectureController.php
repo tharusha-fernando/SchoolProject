@@ -7,6 +7,7 @@ use App\Http\Requests\StoreLectureRequest;
 use App\Http\Requests\UpdateLectureRequest;
 use App\Models\ClassRoom;
 use App\Models\Course;
+use App\Models\Student;
 use App\Models\Tutors;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -239,7 +240,18 @@ class LectureController extends Controller
         }
 
         // dd($closestNextSunday);
-        $lecturesThisWeek = Lecture::with('Course','ClassRoom','Tutor.User')->whereBetween('date', [$closestPastMonday, $closestNextSunday])->orderBy('start_time')->get();
+        $lecturesThisWeek = Lecture::with('Course.Student','ClassRoom','Tutor.User')
+        ->when(auth()->user()->hasRole('Student'),function($query){
+            $query->whereHas('Course.Student',function($query2){
+                $query2->where('user_id',auth()->user()->id);
+            });
+        })
+        ->when(auth()->user()->hasRole('Tutor'),function($query){
+            $query->whereHas('Tutor',function($query2){
+                $query2->where('user_id',auth()->user()->id);
+            });
+        })
+        ->whereBetween('date', [$closestPastMonday, $closestNextSunday])->orderBy('start_time')->get();
         // dd($lecturesThisWeek);
         // $records = YourModel::whereBetween('date_column', [$startDate, $endDate])->get();
         $lecturesMonday = [];
