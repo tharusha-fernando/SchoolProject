@@ -221,7 +221,7 @@
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Monday) && is_object($lecs->Monday) && isset($lecs->Monday->course))
                                                                 <h6 class="mb-0 text-sm">
-                                                                    <a href="{{route('lectures.edit', ['lecture' => $lecs->Monday->id])}}"> {{ $lecs->Monday->course->course_name }}</a></h6>
+                                                                    <a href="{{route('threads.show', ['lecture' => $lecs->Monday->id])}}"> {{ $lecs->Monday->course->course_name }}</a></h6>
                                                                 <h6 class="mb-0 text-sm"> By
                                                                     {{ $lecs->Monday->Tutor->User->name }}</h6>
                                                                 <h6 class="mb-0 text-sm"> In
@@ -245,7 +245,7 @@
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Tuesday) && is_object($lecs->Tuesday) && isset($lecs->Tuesday->course))
                                                             <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Tuesday->id])}}">  {{ $lecs->Tuesday->course->course_name }}</a></h6>
+                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Tuesday->id])}}">  {{ $lecs->Tuesday->course->course_name }}</a></h6>
                                                             <h6 class="mb-0 text-sm"> By
                                                                 {{ $lecs->Tuesday->Tutor->User->name }}</h6>
                                                             <h6 class="mb-0 text-sm"> In
@@ -268,7 +268,7 @@
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Wednesday) && is_object($lecs->Wednesday) && isset($lecs->Wednesday->course))
                                                             <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Wednesday->id])}}">  {{ $lecs->Wednesday->course->course_name }}</a></h6>
+                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Wednesday->id])}}">  {{ $lecs->Wednesday->course->course_name }}</a></h6>
                                                             <h6 class="mb-0 text-sm"> By
                                                                 {{ $lecs->Wednesday->Tutor->User->name }}</h6>
                                                             <h6 class="mb-0 text-sm"> In
@@ -291,7 +291,7 @@
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Thursday) && is_object($lecs->Thursday) && isset($lecs->Thursday->course))
                                                             <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Thursday->id])}}"> {{ $lecs->Thursday->course->course_name }}</a></h6>
+                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Thursday->id])}}"> {{ $lecs->Thursday->course->course_name }}</a></h6>
                                                             <h6 class="mb-0 text-sm"> By
                                                                 {{ $lecs->Thursday->Tutor->User->name }}</h6>
                                                             <h6 class="mb-0 text-sm"> In
@@ -314,7 +314,7 @@
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Friday) && is_object($lecs->Friday) && isset($lecs->Friday->course))
                                                             <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Friday->id])}}"> {{ $lecs->Friday->course->course_name }}</a></h6>
+                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Friday->id])}}"> {{ $lecs->Friday->course->course_name }}</a></h6>
                                                             <h6 class="mb-0 text-sm"> By
                                                                 {{ $lecs->Friday->Tutor->User->name }}</h6>
                                                             <h6 class="mb-0 text-sm"> In
@@ -337,7 +337,7 @@
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Saturday) && is_object($lecs->Saturday) && isset($lecs->Saturday->course))
                                                             <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('lectures.edit', ['lecture' => $lecs->Saturday->id])}}">  {{ $lecs->Saturday->course->course_name }}</a></h6>
+                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Saturday->id])}}">  {{ $lecs->Saturday->course->course_name }}</a></h6>
                                                             <h6 class="mb-0 text-sm"> By
                                                                 {{ $lecs->Saturday->Tutor->User->name }}</h6>
                                                             <h6 class="mb-0 text-sm"> In
@@ -360,7 +360,7 @@
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Sunday) && is_object($lecs->Sunday) && isset($lecs->Sunday->course))
                                                             <h6 class="mb-0 text-sm">
-                                                               <a href="{{route('lectures.edit', ['lecture' => $lecs->Sunday->id])}}"> {{ $lecs->Sunday->course->course_name }}</a></h6>
+                                                               <a href="{{route('threads.show', ['lecture' => $lecs->Sunday->id])}}"> {{ $lecs->Sunday->course->course_name }}</a></h6>
                                                             <h6 class="mb-0 text-sm"> By
                                                                 {{ $lecs->Sunday->Tutor->User->name }}</h6>
                                                             <h6 class="mb-0 text-sm"> In

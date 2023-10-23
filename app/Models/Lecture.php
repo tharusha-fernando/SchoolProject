@@ -31,4 +31,8 @@ class Lecture extends Model
         return $this->belongsTo(Tutors::class);
     }
 
+    public function Thread(){
+        return $this->hasOne(Thread::class,'lecture_id');
+    }
+
 }

@@ -15,5 +15,10 @@ class Thread extends Model
     public function Lecture(){
         return $this->belongsTo(Lecture::class);
     }
+
+    public function Message(){
+        return $this->hasMany(Message::class,'thread_id');
+    }
+
     
 }

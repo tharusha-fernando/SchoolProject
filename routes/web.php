@@ -21,11 +21,13 @@ Route::get('/', function () {
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LectureController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\Student\MyCourses;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ThreadController;
 use App\Http\Controllers\TutorsController;
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -79,6 +81,18 @@ Route::group(['middleware' => 'auth'], function () {
 	//routes
 	
 	
+
+
+	Route::get('/threads/{lecture}/view',[ThreadController::class,'show'])->name('threads.show');
+	// Route::resource('threads',ThreadController::class);
+	Route::get('/threads',[ThreadController::class,'index'])->name('threads.index');
+	Route::get('/threads-get-data',[ThreadController::class,'getData'])->name('threads.getData');
+
+	Route::resource('messages',MessageController::class);
+
+	
+
+
 
 	Route::group(['middleware' => ['role:administrator|superadministrator']], function() {
 		Route::resource('students',StudentController::class);

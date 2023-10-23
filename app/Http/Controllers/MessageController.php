@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Message;
 use App\Http\Requests\StoreMessageRequest;
 use App\Http\Requests\UpdateMessageRequest;
+use Flasher\Laravel\Http\Request;
+use Laravel\Ui\Presets\React;
 
 class MessageController extends Controller
 {
@@ -29,8 +31,17 @@ class MessageController extends Controller
      */
     public function store(StoreMessageRequest $request)
     {
-        //
+        $validatedData=$request->validated();
+        // dd($validatedData);
+        $message = Message::create([
+            'message' => $validatedData['message'],
+            'thread_id' => $validatedData['thread_id'],
+            'user_id' => auth()->user()->id,
+        ]);
+        flash()->addSuccess("Message Sent Successfully.");
+        return redirect()->back();
     }
+
 
     /**
      * Display the specified resource.

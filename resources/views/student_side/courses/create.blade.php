@@ -91,19 +91,19 @@
     <script>
         $(document).ready(function() {
 
-            $("#studentCreateForm").on('submit', function(e) {
-                e.preventDefault();
-                $('.error').text('');
-                $('.form-group').removeClass('border--red');
+            // $("#studentCreateForm").on('submit', function(e) {
+            //     e.preventDefault();
+            //     $('.error').text('');
+            //     $('.form-group').removeClass('border--red');
 
-                var action = $(this).attr('action');
-                var formData = $(this).serialize();
-                var method = $(this).attr('method');
+            //     var action = $(this).attr('action');
+            //     var formData = $(this).serialize();
+            //     var method = $(this).attr('method');
 
-                submitForm(action, method, formData);
-                $('#studentCreateForm')[0].reset();
+            //     submitForm(action, method, formData);
+            //     $('#studentCreateForm')[0].reset();
 
-            });
+            // });
 
 
             var table = $('#studentsDataTable').DataTable({
