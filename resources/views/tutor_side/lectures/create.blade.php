@@ -1,5 +1,5 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-    <x-navbars.sidebar activePage="students"></x-navbars.sidebar>
+    <x-navbars.sidebar activePage="lectures"></x-navbars.sidebar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>
@@ -10,65 +10,80 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Add Students</h6>
+                                <h6 class="text-white text-capitalize ps-3">Add Lectures</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2 m-2">
                             <div class="px-0 pb-2 m-2">
-                                <form method='POST' action='{{ route('students.store') }}' id="studentCreateForm">
+                                <form method='POST' action='{{ route('lecture-tutors.store') }}' id="lectureCreateForm">
                                     @csrf
                                     <div class="row">
 
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Email address</label>
-                                            <input type="email" name="email"
-                                                class="form-control border border-2 p-2"
-                                                value='{{ old('email', auth()->user()->email) }}'>
+                                            <label class="form-label">Tutor</label>
+                                            <select class="form-control border border-2 p-2" name="tutor_id">
+                                                @foreach ($tutors as $tutor)
+                                                    <option value="{{ $tutor->id }}">{{ $tutor->User->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                             <small
-                                                class="text-danger error error_email">{{ $errors->first('email') }}</small>
+                                                class="text-danger error error_tutor_id">{{ $errors->first('tutor_id') }}</small>
 
                                         </div>
 
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Name</label>
-                                            <input type="text" name="name"
-                                                class="form-control border border-2 p-2"
-                                                value='{{ old('name', auth()->user()->name) }}'>
+                                            <label class="form-label">Course</label>
+                                            <select class="form-control border border-2 p-2" name="course_id">
+                                                @foreach ($courses as $course)
+                                                    <option value="{{ $course->id }}">{{ $course->course_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                             <small
-                                                class="text-danger error error_name">{{ $errors->first('name') }}</small>
+                                                class="text-danger error error_course_id">{{ $errors->first('course_id') }}</small>
 
                                         </div>
 
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Phone</label>
-                                            <input type="tel" name="tp"
-                                                class="form-control border border-2 p-2" value=''>
-                                            <small class="text-danger error error_tp">{{ $errors->first('tp') }}</small>
+                                            <label class="form-label">Class Room</label>
+                                            <select class="form-control border border-2 p-2" name="classroom_id">
+                                                @foreach ($classRooms as $classRoom)
+                                                    <option value="{{ $classRoom->id }}">{{ $classRoom->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            <small
+                                                class="text-danger error error_classroom_id">{{ $errors->first('classroom_id') }}</small>
 
                                         </div>
 
                                         <div class="mb-3 col-md-6">
-                                            <label class="form-label">Gender</label>
+                                            <label class="form-label">Time Slots</label>
                                             <div class="form-group">
                                                 <select class="form-control  border border-2 p-2" id="exampleGender"
-                                                    name="gender">
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                    <option value="non-binary">Non-Binary</option>
+                                                    name="time_slot">
+                                                    <option value="1">2PM - 4PM</option>
+                                                    <option value="2">4PM - 6PM</option>
+                                                    <option value="3">6PM - 8PM</option>
                                                 </select>
                                             </div>
 
                                             <small
-                                                class="text-danger error error_gender">{{ $errors->first('gender') }}</small>
+                                                class="text-danger error error_time_slot">{{ $errors->first('time_slot') }}</small>
 
                                         </div>
 
-                                        <div class="mb-3 col-md-12">
-                                            <label for="floatingTextarea2">Address</label>
-                                            <textarea class="form-control border border-2 p-2" placeholder=" Write Here....." id="floatingTextarea2" name="address"
-                                                rows="4" cols="50">{{ old('about', auth()->user()->about) }}</textarea>
+                                        <div class="mb-3 col-md-6">
+                                            <label class="form-label">Date</label>
+                                            <input class="form-control border border-2 p-2" name="date"
+                                                type="date">
+                                            {{-- <select >
+                                                @foreach ($tutors as $tutor)
+                                                    <option value="{{$tutor->id}}">{{$tutor->User->name}}</option>
+                                                @endforeach
+                                            </select> --}}
                                             <small
-                                                class="text-danger error error_address">{{ $errors->first('address') }}</small>
+                                                class="text-danger error error_date">{{ $errors->first('date') }}</small>
 
                                         </div>
                                     </div>
@@ -91,7 +106,7 @@
     <script>
         $(document).ready(function() {
 
-            $("#studentCreateForm").on('submit', function(e) {
+            $("#lectureCreateForm").on('submit', function(e) {
                 e.preventDefault();
                 $('.error').text('');
                 $('.form-group').removeClass('border--red');
@@ -101,7 +116,7 @@
                 var method = $(this).attr('method');
 
                 submitForm(action, method, formData);
-                $('#studentCreateForm')[0].reset();
+                $('#lectureCreateForm')[0].reset();
 
             });
 

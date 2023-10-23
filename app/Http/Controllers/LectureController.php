@@ -7,6 +7,7 @@ use App\Http\Requests\StoreLectureRequest;
 use App\Http\Requests\UpdateLectureRequest;
 use App\Models\ClassRoom;
 use App\Models\Course;
+use App\Models\Student;
 use App\Models\Tutors;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -60,18 +61,23 @@ class LectureController extends Controller
         }
 
         $isTaken = Lecture::where('date', $validatedData['date'])
-            ->where('start_time', $validatedData['start_time'])
-            ->where('classroom_id', $validatedData['classroom_id'])
+            ->where(function ($query) use ($validatedData) {
+                $query->where('start_time', $validatedData['start_time'])
+                    ->where(function ($query2) use ($validatedData) {
+                        $query2->where('tutor_id', $validatedData['tutor_id'])
+                            ->orWhere('classroom_id', $validatedData['classroom_id']);
+                    });
+            })
             ->exists();
 
         // dd($isTaken);
         if ($isTaken) {
             return response()->json([
-                'message' => 'Time Slot Already Taken',
+                'message' => 'Time Slot Already Taken Or Tutor Is Booked',
                 'errors' => [
                     'classroom_id' => ['The selected time slot is already taken.'],
-                    'time_slot' => ['The selected time slot is already taken.']
-
+                    'time_slot' => ['The selected time slot is already taken.'],
+                    'tutor_id' => ['The selected time slot is already taken.']
                 ]
             ], 422);
             // return response()->json(['message'=>"Time Slot Already Taken"],500);
@@ -127,18 +133,24 @@ class LectureController extends Controller
         }
 
         $isTaken = Lecture::where('date', $validatedData['date'])
-            ->where('start_time', $validatedData['start_time'])
-            ->where('classroom_id', $validatedData['classroom_id'])
             ->whereNot('id', $lecture->id)
+            ->where(function ($query) use ($validatedData) {
+                $query->where('start_time', $validatedData['start_time'])
+                    ->where(function ($query2) use ($validatedData) {
+                        $query2->where('tutor_id', $validatedData['tutor_id'])
+                            ->orWhere('classroom_id', $validatedData['classroom_id']);
+                    });
+            })
             ->exists();
 
         // dd($isTaken);
         if ($isTaken) {
             return response()->json([
-                'message' => 'Time Slot Already Taken',
+                'message' => 'Time Slot Already Taken Or Tutor Is Booked',
                 'errors' => [
                     'classroom_id' => ['The selected time slot is already taken.'],
-                    'time_slot' => ['The selected time slot is already taken.']
+                    'time_slot' => ['The selected time slot is already taken.'],
+                    'tutor_id' => ['The selected time slot is already taken.']
 
                 ]
             ], 422);
@@ -218,28 +230,43 @@ class LectureController extends Controller
 
     public static function getTimetable()
     {
-        $today = Carbon::today();
-
+        $today = Carbon::today('Asia/Colombo');
         // Check if today is a Monday
+        // dd($today->dayOfWeek);
         if ($today->dayOfWeek === Carbon::MONDAY) {
+            // dd("asasas");
             // If today is Monday, return today's date
-            $closestPastMonday = $today;
+            $closestPastMonday = $today->format('Y-m-d');
         } else {
             // Find the date of the closest past Monday
-            $closestPastMonday = $today->previous(Carbon::MONDAY)->format('Y:m:d');
+            // dd($today->previous(Carbon::MONDAY)->format('Y-m-d'));
+            $closestPastMonday = $today->previous(Carbon::MONDAY)->format('Y-m-d');
         }
 
-        // Check if today is a Monday
+        // Check if today is a Sunday
         if ($today->dayOfWeek === Carbon::SUNDAY) {
-            // If today is Monday, return today's date
-            $closestNextSunday = $today;
+            // If today is Sunday, return today's date
+            $closestNextSunday = $today->format('Y-m-d');
         } else {
-            // Find the date of the closest past Monday
-            $closestNextSunday = $today->next(Carbon::SUNDAY)->format('Y:m:d');
+            // Find the date of the closest next Sunday
+            $closestNextSunday = $today->next(Carbon::SUNDAY)->format('Y-m-d');
         }
 
-        // dd($closestNextSunday);
-        $lecturesThisWeek = Lecture::with('Course','ClassRoom','Tutor.User')->whereBetween('date', [$closestPastMonday, $closestNextSunday])->orderBy('start_time')->get();
+        // dd($closestPastMonday, $closestNextSunday);
+
+        $lecturesThisWeek = Lecture::with('Course.Student', 'ClassRoom', 'Tutor.User')
+            ->whereBetween('date', [$closestPastMonday, $closestNextSunday])
+            ->when(auth()->user()->hasRole('student'), function ($query) {
+                $query->whereHas('Course.Student', function ($query2) {
+                    $query2->where('user_id', auth()->user()->id);
+                });
+            })
+            ->when(auth()->user()->hasRole('tutor'), function ($query) {
+                $query->whereHas('Tutor', function ($query2) {
+                    $query2->where('user_id', auth()->user()->id);
+                });
+            })
+            ->orderBy('start_time')->get();
         // dd($lecturesThisWeek);
         // $records = YourModel::whereBetween('date_column', [$startDate, $endDate])->get();
         $lecturesMonday = [];
@@ -296,7 +323,7 @@ class LectureController extends Controller
         //     $lecturesSunday,
         // );
 
-        $collectionTime=[];
+        $collectionTime = [];
         $count = 0;
         // dd("asasasasas");
         while (true) {
@@ -318,8 +345,8 @@ class LectureController extends Controller
                 'Saturday'  => isset($lecturesSaturday[$count]) ? $lecturesSaturday[$count] : "",
                 'Sunday'    => isset($lecturesSunday[$count]) ? $lecturesSunday[$count] : "",
             ];
-            
-            $collectionTime[]=$lec;
+
+            $collectionTime[] = $lec;
             // dd($collectionTime);
 
             // unset($lecturesMonday[$count]);
@@ -351,20 +378,19 @@ class LectureController extends Controller
             if (isset($lecturesSunday[$count])) {
                 unset($lecturesSunday[$count]);
             }
-            
+
             // dd($lecturesSaturday);
-$breakLoop=false;
+            $breakLoop = false;
             if (empty($lecturesMonday) && empty($lecturesTuesday) && empty($lecturesWednesday) && empty($lecturesThursday) && empty($lecturesFriday) && empty($lecturesSaturday) && empty($lecturesSunday)) {
                 $breakLoop = true;
                 // break;
             }
-            if($breakLoop){
+            if ($breakLoop) {
                 break;
             }
             $count++;
         }
-    //   dd($collectionTime);
-    return collect($collectionTime);
-
+        //   dd($collectionTime);
+        return collect($collectionTime);
     }
 }

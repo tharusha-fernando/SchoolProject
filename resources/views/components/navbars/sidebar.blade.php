@@ -100,11 +100,47 @@
             @endif
 
             @if (auth()->user()->hasRole('tutor'))
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'threads' ? ' active bg-gradient-primary' : '' }} "
+                    href="{{ route('threads.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">My Discussions</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'lectures' ? ' active bg-gradient-primary' : '' }} "
+                    href="{{ route('lecture-tutors.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">My Lectures</span>
+                </a>
+            </li>
             @endif
 
 
 
             @if (auth()->user()->hasRole('student'))
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'mycourses' ? ' active bg-gradient-primary' : '' }} "
+                    href="{{ route('my-courses.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Courses</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'threads' ? ' active bg-gradient-primary' : '' }} "
+                    href="{{ route('threads.index') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">My Discussions</span>
+                </a>
+            </li>
             @endif
 
 

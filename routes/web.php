@@ -21,10 +21,14 @@ Route::get('/', function () {
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LectureController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\Student\MyCourses;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ThreadController;
+use App\Http\Controllers\Tutor\LectureTutorController;
 use App\Http\Controllers\TutorsController;
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -79,6 +83,18 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	
 
+
+	Route::get('/threads/{lecture}/view',[ThreadController::class,'show'])->name('threads.show');
+	// Route::resource('threads',ThreadController::class);
+	Route::get('/threads',[ThreadController::class,'index'])->name('threads.index');
+	Route::get('/threads-get-data',[ThreadController::class,'getData'])->name('threads.getData');
+
+	Route::resource('messages',MessageController::class);
+
+	
+
+
+
 	Route::group(['middleware' => ['role:administrator|superadministrator']], function() {
 		Route::resource('students',StudentController::class);
 		Route::get('/students-get-data',[StudentController::class,'getData'])->name('students.getData');
@@ -100,10 +116,16 @@ Route::group(['middleware' => 'auth'], function () {
 	
 
 	Route::group(['prefix' => 'student', 'middleware' => ['role:student']], function() {
-	
+		Route::resource('my-courses',MyCourses::class);
+		Route::get('/mycourses/get-data',[MyCourses::class,'getData'])->name('my-courses.getData');
+		
+
 	});
 
 	Route::group(['prefix' => 'tutor', 'middleware' => ['role:tutor']], function() {
-	
+		Route::resource('lecture-tutors',LectureTutorController::class);
+		Route::get('/lectures-tutors-get-data',[LectureTutorController::class,'getData'])->name('lectures-tutors.getData');
+
+
 	});
 });

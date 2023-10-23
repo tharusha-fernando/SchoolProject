@@ -18,7 +18,7 @@ class DashboardController extends Controller
         // Check if today is a Monday
         if ($today->dayOfWeek === Carbon::MONDAY) {
             // If today is Monday, return today's date
-            $closestPastMonday = $today;
+            $closestPastMonday = $today->format('Y:m:d');
         } else {
             // Find the date of the closest past Monday
             $closestPastMonday = $today->previous(Carbon::MONDAY)->format('Y:m:d');
@@ -27,7 +27,7 @@ class DashboardController extends Controller
         // Check if today is a Monday
         if ($today->dayOfWeek === Carbon::SUNDAY) {
             // If today is Monday, return today's date
-            $closestNextSunday = $today;
+            $closestNextSunday = $today->format('Y:m:d');
         } else {
             // Find the date of the closest past Monday
             $closestNextSunday = $today->next(Carbon::SUNDAY)->format('Y:m:d');
@@ -55,9 +55,21 @@ class DashboardController extends Controller
 // dd($todaysLectures);
             return view('dashboard.index', compact('studentCount', 'tutorCount','courseCount','lectureCount','todaysLectures','lectureTimetable'));
         } elseif (auth()->user()->hasRole('student')) {
-            return view('student_side.dashboard.index');
+            $studentCount = Student::count();
+            $tutorCount = Tutors::count();
+            $courseCount=Course::count();
+            $lectureCount=Lecture::whereBetween('date', [$closestPastMonday, $closestNextSunday])->count();
+            $lectureTimetable=LectureController::getTimetable();
+            return view('student_side.dashboard.index',compact('studentCount', 'tutorCount','courseCount','lectureCount','lectureTimetable'));
         } elseif (auth()->user()->hasRole('tutor')) {
-            return view('tutor_side.dashboard.index');
+            $studentCount = Student::count();
+            $tutorCount = Tutors::count();
+            $courseCount=Course::count();
+            $lectureCount=Lecture::whereBetween('date', [$closestPastMonday, $closestNextSunday])->count();
+            $lectureTimetable=LectureController::getTimetable();
+            return view('tutor_side.dashboard.index',compact('studentCount', 'tutorCount','courseCount','lectureCount','lectureTimetable'));
+       
+            // return view('tutor_side.dashboard.index');
         }
     }
 }

@@ -211,6 +211,81 @@
             });
         }
 
+        function addCourse(url, table = null,id=null) {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                // type: 'DELETE',
+                data: {
+                    'id': id,
+                    '_token': '{{ csrf_token() }}',
+                },
+                // headers: {
+                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                // },
+                beforeSend: function() {
+                    showLoading();
+                },
+                success: function(response, status, xhr) {
+                    if (xhr.status === 200) {
+                        flasher.success(response.message);
+                        if (table) {
+                            table.ajax.reload();
+                        }
+                    } else if (xhr.status === 203) {
+                        flasher.warning('You cannot change logged user details.');
+                    } else {
+                        flasher.error("Internal server error.");
+                    }
+                },
+                error: function(xhr) {
+                    flasher.error("Internal Server Error.");
+                },
+                complete: function() {
+                    hideLoading();
+                }
+            });
+        }
+
+
+
+        function removeCourse(url, table = null,id=null) {
+            $.ajax({
+                url: url,
+                type: 'POST',
+                // type: 'DELETE',
+                data: {
+                    'id': id,
+                    '_token': '{{ csrf_token() }}',
+                },
+                // headers: {
+                //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                // },
+                beforeSend: function() {
+                    showLoading();
+                },
+                success: function(response, status, xhr) {
+                    if (xhr.status === 200) {
+                        flasher.success(response.message);
+                        if (table) {
+                            table.ajax.reload();
+                        }
+                    } else if (xhr.status === 203) {
+                        flasher.warning('You cannot change logged user details.');
+                    } else {
+                        flasher.error("Internal server error.");
+                    }
+                },
+                error: function(xhr) {
+                    flasher.error("Internal Server Error.");
+                },
+                complete: function() {
+                    hideLoading();
+                }
+            });
+        }
+
+
         // document.addEventListener("DOMContentLoaded", function() {
         //     var deleteButtons = document.querySelectorAll(".delete-btn");
 
