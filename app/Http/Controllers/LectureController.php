@@ -61,18 +61,23 @@ class LectureController extends Controller
         }
 
         $isTaken = Lecture::where('date', $validatedData['date'])
-            ->where('start_time', $validatedData['start_time'])
-            ->where('classroom_id', $validatedData['classroom_id'])
+            ->where(function ($query) use ($validatedData) {
+                $query->where('start_time', $validatedData['start_time'])
+                    ->where(function ($query2) use ($validatedData) {
+                        $query2->where('tutor_id', $validatedData['tutor_id'])
+                            ->orWhere('classroom_id', $validatedData['classroom_id']);
+                    });
+            })
             ->exists();
 
         // dd($isTaken);
         if ($isTaken) {
             return response()->json([
-                'message' => 'Time Slot Already Taken',
+                'message' => 'Time Slot Already Taken Or Tutor Is Booked',
                 'errors' => [
                     'classroom_id' => ['The selected time slot is already taken.'],
-                    'time_slot' => ['The selected time slot is already taken.']
-
+                    'time_slot' => ['The selected time slot is already taken.'],
+                    'tutor_id' => ['The selected time slot is already taken.']
                 ]
             ], 422);
             // return response()->json(['message'=>"Time Slot Already Taken"],500);
@@ -128,18 +133,24 @@ class LectureController extends Controller
         }
 
         $isTaken = Lecture::where('date', $validatedData['date'])
-            ->where('start_time', $validatedData['start_time'])
-            ->where('classroom_id', $validatedData['classroom_id'])
             ->whereNot('id', $lecture->id)
+            ->where(function ($query) use ($validatedData) {
+                $query->where('start_time', $validatedData['start_time'])
+                    ->where(function ($query2) use ($validatedData) {
+                        $query2->where('tutor_id', $validatedData['tutor_id'])
+                            ->orWhere('classroom_id', $validatedData['classroom_id']);
+                    });
+            })
             ->exists();
 
         // dd($isTaken);
         if ($isTaken) {
             return response()->json([
-                'message' => 'Time Slot Already Taken',
+                'message' => 'Time Slot Already Taken Or Tutor Is Booked',
                 'errors' => [
                     'classroom_id' => ['The selected time slot is already taken.'],
-                    'time_slot' => ['The selected time slot is already taken.']
+                    'time_slot' => ['The selected time slot is already taken.'],
+                    'tutor_id' => ['The selected time slot is already taken.']
 
                 ]
             ], 422);

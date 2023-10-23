@@ -28,6 +28,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\Student\MyCourses;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ThreadController;
+use App\Http\Controllers\Tutor\LectureTutorController;
 use App\Http\Controllers\TutorsController;
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
@@ -122,6 +123,9 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 
 	Route::group(['prefix' => 'tutor', 'middleware' => ['role:tutor']], function() {
-	
+		Route::resource('lecture-tutors',LectureTutorController::class);
+		Route::get('/lectures-tutors-get-data',[LectureTutorController::class,'getData'])->name('lectures-tutors.getData');
+
+
 	});
 });
