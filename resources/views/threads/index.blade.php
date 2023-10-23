@@ -7,10 +7,10 @@
         <div class="container-fluid py-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                    <h6 class="text-white text-capitalize ps-3">Chat</h6>
+                    <h6 class="text-white text-capitalize ps-3">Discussion</h6>
                 </div>
             </div>
-            <div class="row" style="height: 400px; overflow-y: scroll;">
+            <div class="row border p-6 mt-4" style="height: 400px; overflow-y: scroll;">
                 @foreach ($thread->Message as $Message)
                     <div class="col-md-12 mb-3">
                         <div class="card {{ $Message->user_id == auth()->user()->id ? 'text-end' : 'text-start' }}">
@@ -18,6 +18,7 @@
                                 <div class="pt-1">
                                     <p class="text-xl mb-0 text-capitalize">{{ $Message->User->name }}</p>
                                     <h6 class="mb-0">{{ $Message->message }}</h6>
+                                    <p class="text-sm mb-0 text-capitalize">{{ $Message->created_at }}</p>
                                 </div>
                             </div>
                             <hr class="dark horizontal my-0">
@@ -26,25 +27,25 @@
                     </div>
                 @endforeach
             </div>
-            
-            <div class="row card m-4">
+
+            <div class="row p-1 card m-4">
 
                 <div class="px-0 pb-2 m-2">
                     <form method='POST' action='{{ route('messages.store') }}' id="messageCreateForm">
                         @csrf
                         <div class="row ">
-                
+
                             <div class="mb-3 col-md-12">
                                 <label for="floatingTextarea2">Message</label>
-                                <textarea class="form-control border border-2 p-2" placeholder=" Say something about yourself" id="floatingTextarea2"
-                                    name="message" rows="4" cols="50"></textarea>
+                                <textarea class="form-control border border-2 p-2" placeholder=" Write Here....." id="floatingTextarea2" name="message"
+                                    rows="4" cols="50"></textarea>
                                 {{-- <small
                                     class="text-danger error error_message">{{ $errors->first('message') }}</small> --}}
 
-                                    <small class="text-danger">{{ $errors->first('message') }}</small> 
+                                <small class="text-danger">{{ $errors->first('message') }}</small>
                             </div>
                         </div>
-                        <input type="hidden" value="{{$thread->id}}" name="thread_id">
+                        <input type="hidden" value="{{ $thread->id }}" name="thread_id">
                         {{-- <input type="hidden" value="{{$thread->id}}" name="thread_id"> --}}
 
                         <button type="submit" class="btn bg-gradient-dark">Send</button>

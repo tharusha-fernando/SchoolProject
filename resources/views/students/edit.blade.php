@@ -65,8 +65,8 @@
 
                                         <div class="mb-3 col-md-12">
                                             <label for="floatingTextarea2">Address</label>
-                                            <textarea class="form-control border border-2 p-2" placeholder=" Say something about yourself" id="floatingTextarea2"
-                                                name="address" rows="4" cols="50">{{ $student->Student->address }}</textarea>
+                                            <textarea class="form-control border border-2 p-2" placeholder=" Write Here....." id="floatingTextarea2" name="address"
+                                                rows="4" cols="50">{{ $student->Student->address }}</textarea>
                                             <small
                                                 class="text-danger error error_address">{{ $errors->first('address') }}</small>
 

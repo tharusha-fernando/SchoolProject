@@ -239,7 +239,7 @@ class LectureController extends Controller
             $closestPastMonday = $today->format('Y-m-d');
         } else {
             // Find the date of the closest past Monday
-            dd($today->previous(Carbon::MONDAY)->format('Y-m-d'));
+            // dd($today->previous(Carbon::MONDAY)->format('Y-m-d'));
             $closestPastMonday = $today->previous(Carbon::MONDAY)->format('Y-m-d');
         }
 

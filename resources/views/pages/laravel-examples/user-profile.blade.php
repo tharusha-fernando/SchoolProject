@@ -66,71 +66,74 @@
                     </div>
                     <div class="card-body p-3">
                         @if (session('status'))
-                        <div class="row">
-                            <div class="alert alert-success alert-dismissible text-white" role="alert">
-                                <span class="text-sm">{{ Session::get('status') }}</span>
-                                <button type="button" class="btn-close text-lg py-3 opacity-10"
-                                    data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <div class="row">
+                                <div class="alert alert-success alert-dismissible text-white" role="alert">
+                                    <span class="text-sm">{{ Session::get('status') }}</span>
+                                    <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                        data-bs-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
                         @endif
                         @if (Session::has('demo'))
-                                <div class="row">
-                                    <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                                        <span class="text-sm">{{ Session::get('demo') }}</span>
-                                        <button type="button" class="btn-close text-lg py-3 opacity-10"
-                                            data-bs-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
+                            <div class="row">
+                                <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                                    <span class="text-sm">{{ Session::get('demo') }}</span>
+                                    <button type="button" class="btn-close text-lg py-3 opacity-10"
+                                        data-bs-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
+                            </div>
                         @endif
                         <form method='POST' action='{{ route('user-profile') }}'>
                             @csrf
                             <div class="row">
-                                
+
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Email address</label>
-                                    <input type="email" name="email" class="form-control border border-2 p-2" value='{{ old('email', auth()->user()->email) }}'>
+                                    <input type="email" name="email" class="form-control border border-2 p-2"
+                                        value='{{ old('email', auth()->user()->email) }}'>
                                     @error('email')
-                                <p class='text-danger inputerror'>{{ $message }} </p>
-                                @enderror
+                                        <p class='text-danger inputerror'>{{ $message }} </p>
+                                    @enderror
                                 </div>
-                                
+
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Name</label>
-                                    <input type="text" name="name" class="form-control border border-2 p-2" value='{{ old('name', auth()->user()->name) }}'>
+                                    <input type="text" name="name" class="form-control border border-2 p-2"
+                                        value='{{ old('name', auth()->user()->name) }}'>
                                     @error('name')
-                                <p class='text-danger inputerror'>{{ $message }} </p>
-                                @enderror
+                                        <p class='text-danger inputerror'>{{ $message }} </p>
+                                    @enderror
                                 </div>
-                               
+
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Phone</label>
-                                    <input type="number" name="phone" class="form-control border border-2 p-2" value='{{ old('phone', auth()->user()->phone) }}'>
+                                    <input type="number" name="phone" class="form-control border border-2 p-2"
+                                        value='{{ old('phone', auth()->user()->phone) }}'>
                                     @error('phone')
-                                    <p class='text-danger inputerror'>{{ $message }} </p>
+                                        <p class='text-danger inputerror'>{{ $message }} </p>
                                     @enderror
                                 </div>
-                                
+
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Location</label>
-                                    <input type="text" name="location" class="form-control border border-2 p-2" value='{{ old('location', auth()->user()->location) }}'>
+                                    <input type="text" name="location" class="form-control border border-2 p-2"
+                                        value='{{ old('location', auth()->user()->location) }}'>
                                     @error('location')
-                                    <p class='text-danger inputerror'>{{ $message }} </p>
+                                        <p class='text-danger inputerror'>{{ $message }} </p>
                                     @enderror
                                 </div>
-                                
+
                                 <div class="mb-3 col-md-12">
                                     <label for="floatingTextarea2">About</label>
-                                    <textarea class="form-control border border-2 p-2"
-                                        placeholder=" Say something about yourself" id="floatingTextarea2" name="about"
-                                        rows="4" cols="50">{{ old('about', auth()->user()->about) }}</textarea>
-                                        @error('about')
+                                    <textarea class="form-control border border-2 p-2" placeholder=" Write Here....." id="floatingTextarea2"
+                                        name="about" rows="4" cols="50">{{ old('about', auth()->user()->about) }}</textarea>
+                                    @error('about')
                                         <p class='text-danger inputerror'>{{ $message }} </p>
-                                        @enderror
+                                    @enderror
                                 </div>
                             </div>
                             <button type="submit" class="btn bg-gradient-dark">Submit</button>

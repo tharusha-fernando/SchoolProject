@@ -19,4 +19,8 @@ class Course extends Model
     public function Student(){
         return $this->belongsToMany(Student::class,'course_studnet','course_id','student_id');
     }
+
+    public function Tutor(){
+        return $this->belongsToMany(Tutors::class,'course_tutor','course_id','tutor_id');
+    }
 }

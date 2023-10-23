@@ -30,7 +30,10 @@ class LectureTutorController extends Controller
      */
     public function create()
     {
-        $courses = Course::all();
+        // dd(auth()->user()->id);
+        $courses = Course::whereHas('Tutor',function($query){
+            $query->where('user_id',2 );
+        })->get();
         $classRooms = ClassRoom::all();
         $tutors = Tutors::with('User')->where('user_id', auth()->user()->id)->get();
         return view('tutor_side.lectures.create', compact('courses', 'classRooms', 'tutors'));
@@ -110,7 +113,9 @@ class LectureTutorController extends Controller
     public function edit(string $id)
     {
         $lecture=Lecture::find($id);
-        $courses = Course::all();
+        $courses = Course::whereHas('Tutor',function($query){
+            $query->where('user_id',2 );
+        })->get();
         $classRooms = ClassRoom::all();
         $tutors = Tutors::with('User')->where('user_id', auth()->user()->id)->get();
         return view('tutor_side.lectures.edit', compact('lecture', 'courses', 'classRooms', 'tutors'));

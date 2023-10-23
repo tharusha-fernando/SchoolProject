@@ -18,7 +18,7 @@ class DashboardController extends Controller
         // Check if today is a Monday
         if ($today->dayOfWeek === Carbon::MONDAY) {
             // If today is Monday, return today's date
-            $closestPastMonday = $today;
+            $closestPastMonday = $today->format('Y:m:d');
         } else {
             // Find the date of the closest past Monday
             $closestPastMonday = $today->previous(Carbon::MONDAY)->format('Y:m:d');
@@ -27,7 +27,7 @@ class DashboardController extends Controller
         // Check if today is a Monday
         if ($today->dayOfWeek === Carbon::SUNDAY) {
             // If today is Monday, return today's date
-            $closestNextSunday = $today;
+            $closestNextSunday = $today->format('Y:m:d');
         } else {
             // Find the date of the closest past Monday
             $closestNextSunday = $today->next(Carbon::SUNDAY)->format('Y:m:d');

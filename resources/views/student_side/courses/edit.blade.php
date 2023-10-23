@@ -67,7 +67,7 @@
 
                                         <div class="mb-3 col-md-12">
                                             <label for="floatingTextarea2">Description</label>
-                                            <textarea class="form-control border border-2 p-2" placeholder=" Say something about yourself" id="floatingTextarea2"
+                                            <textarea class="form-control border border-2 p-2" placeholder=" Write Here....." id="floatingTextarea2"
                                                 name="description" rows="4" cols="50">{{ $course->description }}</textarea>
                                             <small
                                                 class="text-danger error error_description">{{ $errors->first('description') }}</small>
