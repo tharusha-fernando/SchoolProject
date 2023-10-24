@@ -65,7 +65,7 @@ class TutorsController extends Controller
         }
 
 
-        return response()->json(['message' => "Student Created Successfully"], 200);
+        return response()->json(['message' => "Tutor Created Successfully"], 200);
         //
     }
 
