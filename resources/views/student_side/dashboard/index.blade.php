@@ -158,7 +158,7 @@
                                     </p> --}}
                                 </div>
                                 <div class="col-lg-6 col-5 my-auto text-end">
-                                    <div class="dropdown float-lg-end pe-4">
+                                   {{-- <div class="dropdown float-lg-end pe-4">
                                         <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
                                             aria-expanded="false">
                                             <i class="fa fa-ellipsis-v text-secondary"></i>
@@ -172,7 +172,7 @@
                                             <li><a class="dropdown-item border-radius-md" href="javascript:;">Something
                                                     else here</a></li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -221,7 +221,10 @@
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Monday) && is_object($lecs->Monday) && isset($lecs->Monday->course))
                                                                 <h6 class="mb-0 text-sm">
-                                                                    <a href="{{route('threads.show', ['lecture' => $lecs->Monday->id])}}"> {{ $lecs->Monday->course->course_name }}</a></h6>
+                                                                    <a
+                                                                        href="{{ route('threads.show', ['lecture' => $lecs->Monday->id]) }}">
+                                                                        {{ $lecs->Monday->course->course_name }}</a>
+                                                                </h6>
                                                                 <h6 class="mb-0 text-sm"> By
                                                                     {{ $lecs->Monday->Tutor->User->name }}</h6>
                                                                 <h6 class="mb-0 text-sm"> In
@@ -244,18 +247,21 @@
 
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Tuesday) && is_object($lecs->Tuesday) && isset($lecs->Tuesday->course))
-                                                            <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Tuesday->id])}}">  {{ $lecs->Tuesday->course->course_name }}</a></h6>
-                                                            <h6 class="mb-0 text-sm"> By
-                                                                {{ $lecs->Tuesday->Tutor->User->name }}</h6>
-                                                            <h6 class="mb-0 text-sm"> In
-                                                                {{ $lecs->Tuesday->ClassRoom->name }}
-                                                            </h6>
-                                                            <h6 class="mb-0 text-sm">
-                                                                {{ $lecs->Tuesday->start_time }} -
-                                                                {{ $lecs->Tuesday->end_time }}
-                                                                {{-- to --}}
-                                                            </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    <a
+                                                                        href="{{ route('threads.show', ['lecture' => $lecs->Tuesday->id]) }}">
+                                                                        {{ $lecs->Tuesday->course->course_name }}</a>
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm"> By
+                                                                    {{ $lecs->Tuesday->Tutor->User->name }}</h6>
+                                                                <h6 class="mb-0 text-sm"> In
+                                                                    {{ $lecs->Tuesday->ClassRoom->name }}
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    {{ $lecs->Tuesday->start_time }} -
+                                                                    {{ $lecs->Tuesday->end_time }}
+                                                                    {{-- to --}}
+                                                                </h6>
                                                             @else
                                                                 <h6 class="mb-0 text-sm">No lecture</h6>
                                                             @endif
@@ -267,18 +273,21 @@
 
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Wednesday) && is_object($lecs->Wednesday) && isset($lecs->Wednesday->course))
-                                                            <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Wednesday->id])}}">  {{ $lecs->Wednesday->course->course_name }}</a></h6>
-                                                            <h6 class="mb-0 text-sm"> By
-                                                                {{ $lecs->Wednesday->Tutor->User->name }}</h6>
-                                                            <h6 class="mb-0 text-sm"> In
-                                                                {{ $lecs->Wednesday->ClassRoom->name }}
-                                                            </h6>
-                                                            <h6 class="mb-0 text-sm">
-                                                                {{ $lecs->Wednesday->start_time }} -
-                                                                {{ $lecs->Wednesday->end_time }}
-                                                                {{-- to --}}
-                                                            </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    <a
+                                                                        href="{{ route('threads.show', ['lecture' => $lecs->Wednesday->id]) }}">
+                                                                        {{ $lecs->Wednesday->course->course_name }}</a>
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm"> By
+                                                                    {{ $lecs->Wednesday->Tutor->User->name }}</h6>
+                                                                <h6 class="mb-0 text-sm"> In
+                                                                    {{ $lecs->Wednesday->ClassRoom->name }}
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    {{ $lecs->Wednesday->start_time }} -
+                                                                    {{ $lecs->Wednesday->end_time }}
+                                                                    {{-- to --}}
+                                                                </h6>
                                                             @else
                                                                 <h6 class="mb-0 text-sm">No lecture</h6>
                                                             @endif
@@ -290,18 +299,21 @@
 
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Thursday) && is_object($lecs->Thursday) && isset($lecs->Thursday->course))
-                                                            <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Thursday->id])}}"> {{ $lecs->Thursday->course->course_name }}</a></h6>
-                                                            <h6 class="mb-0 text-sm"> By
-                                                                {{ $lecs->Thursday->Tutor->User->name }}</h6>
-                                                            <h6 class="mb-0 text-sm"> In
-                                                                {{ $lecs->Thursday->ClassRoom->name }}
-                                                            </h6>
-                                                            <h6 class="mb-0 text-sm">
-                                                                {{ $lecs->Thursday->start_time }} -
-                                                                {{ $lecs->Thursday->end_time }}
-                                                                {{-- to --}}
-                                                            </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    <a
+                                                                        href="{{ route('threads.show', ['lecture' => $lecs->Thursday->id]) }}">
+                                                                        {{ $lecs->Thursday->course->course_name }}</a>
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm"> By
+                                                                    {{ $lecs->Thursday->Tutor->User->name }}</h6>
+                                                                <h6 class="mb-0 text-sm"> In
+                                                                    {{ $lecs->Thursday->ClassRoom->name }}
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    {{ $lecs->Thursday->start_time }} -
+                                                                    {{ $lecs->Thursday->end_time }}
+                                                                    {{-- to --}}
+                                                                </h6>
                                                             @else
                                                                 <h6 class="mb-0 text-sm">No lecture</h6>
                                                             @endif
@@ -313,18 +325,21 @@
 
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Friday) && is_object($lecs->Friday) && isset($lecs->Friday->course))
-                                                            <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Friday->id])}}"> {{ $lecs->Friday->course->course_name }}</a></h6>
-                                                            <h6 class="mb-0 text-sm"> By
-                                                                {{ $lecs->Friday->Tutor->User->name }}</h6>
-                                                            <h6 class="mb-0 text-sm"> In
-                                                                {{ $lecs->Friday->ClassRoom->name }}
-                                                            </h6>
-                                                            <h6 class="mb-0 text-sm">
-                                                                {{ $lecs->Friday->start_time }} -
-                                                                {{ $lecs->Friday->end_time }}
-                                                                {{-- to --}}
-                                                            </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    <a
+                                                                        href="{{ route('threads.show', ['lecture' => $lecs->Friday->id]) }}">
+                                                                        {{ $lecs->Friday->course->course_name }}</a>
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm"> By
+                                                                    {{ $lecs->Friday->Tutor->User->name }}</h6>
+                                                                <h6 class="mb-0 text-sm"> In
+                                                                    {{ $lecs->Friday->ClassRoom->name }}
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    {{ $lecs->Friday->start_time }} -
+                                                                    {{ $lecs->Friday->end_time }}
+                                                                    {{-- to --}}
+                                                                </h6>
                                                             @else
                                                                 <h6 class="mb-0 text-sm">No lecture on Friday</h6>
                                                             @endif
@@ -336,18 +351,21 @@
 
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Saturday) && is_object($lecs->Saturday) && isset($lecs->Saturday->course))
-                                                            <h6 class="mb-0 text-sm">
-                                                                <a href="{{route('threads.show', ['lecture' => $lecs->Saturday->id])}}">  {{ $lecs->Saturday->course->course_name }}</a></h6>
-                                                            <h6 class="mb-0 text-sm"> By
-                                                                {{ $lecs->Saturday->Tutor->User->name }}</h6>
-                                                            <h6 class="mb-0 text-sm"> In
-                                                                {{ $lecs->Saturday->ClassRoom->name }}
-                                                            </h6>
-                                                            <h6 class="mb-0 text-sm">
-                                                                {{ $lecs->Saturday->start_time }} -
-                                                                {{ $lecs->Saturday->end_time }}
-                                                                {{-- to --}}
-                                                            </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    <a
+                                                                        href="{{ route('threads.show', ['lecture' => $lecs->Saturday->id]) }}">
+                                                                        {{ $lecs->Saturday->course->course_name }}</a>
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm"> By
+                                                                    {{ $lecs->Saturday->Tutor->User->name }}</h6>
+                                                                <h6 class="mb-0 text-sm"> In
+                                                                    {{ $lecs->Saturday->ClassRoom->name }}
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    {{ $lecs->Saturday->start_time }} -
+                                                                    {{ $lecs->Saturday->end_time }}
+                                                                    {{-- to --}}
+                                                                </h6>
                                                             @else
                                                                 <h6 class="mb-0 text-sm">No lecture</h6>
                                                             @endif
@@ -359,18 +377,21 @@
 
                                                         <div class="d-flex flex-column justify-content-center">
                                                             @if (isset($lecs->Sunday) && is_object($lecs->Sunday) && isset($lecs->Sunday->course))
-                                                            <h6 class="mb-0 text-sm">
-                                                               <a href="{{route('threads.show', ['lecture' => $lecs->Sunday->id])}}"> {{ $lecs->Sunday->course->course_name }}</a></h6>
-                                                            <h6 class="mb-0 text-sm"> By
-                                                                {{ $lecs->Sunday->Tutor->User->name }}</h6>
-                                                            <h6 class="mb-0 text-sm"> In
-                                                                {{ $lecs->Sunday->ClassRoom->name }}
-                                                            </h6>
-                                                            <h6 class="mb-0 text-sm">
-                                                                {{ $lecs->Sunday->start_time }} -
-                                                                {{ $lecs->Sunday->end_time }}
-                                                                {{-- to --}}
-                                                            </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    <a
+                                                                        href="{{ route('threads.show', ['lecture' => $lecs->Sunday->id]) }}">
+                                                                        {{ $lecs->Sunday->course->course_name }}</a>
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm"> By
+                                                                    {{ $lecs->Sunday->Tutor->User->name }}</h6>
+                                                                <h6 class="mb-0 text-sm"> In
+                                                                    {{ $lecs->Sunday->ClassRoom->name }}
+                                                                </h6>
+                                                                <h6 class="mb-0 text-sm">
+                                                                    {{ $lecs->Sunday->start_time }} -
+                                                                    {{ $lecs->Sunday->end_time }}
+                                                                    {{-- to --}}
+                                                                </h6>
                                                             @else
                                                                 <h6 class="mb-0 text-sm">No lecture</h6>
                                                             @endif
