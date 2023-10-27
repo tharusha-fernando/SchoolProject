@@ -157,7 +157,7 @@
                                         <span class="font-weight-bold ms-1">30 done</span> this month
                                     </p> --}}
                                 </div>
-                                <div class="col-lg-6 col-5 my-auto text-end">
+                                {{-- <div class="col-lg-6 col-5 my-auto text-end">
                                     <div class="dropdown float-lg-end pe-4">
                                         <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
                                             aria-expanded="false">
@@ -173,7 +173,7 @@
                                                     else here</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
@@ -679,7 +679,7 @@
                                         <span class="font-weight-bold ms-1">30 done</span> this month
                                     </p> --}}
                                 </div>
-                                <div class="col-lg-6 col-5 my-auto text-end">
+                                {{-- <div class="col-lg-6 col-5 my-auto text-end">
                                     <div class="dropdown float-lg-end pe-4">
                                         <a class="cursor-pointer" id="dropdownTable" data-bs-toggle="dropdown"
                                             aria-expanded="false">
@@ -697,7 +697,7 @@
                                                     else here</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
 
